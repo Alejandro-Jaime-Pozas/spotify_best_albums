@@ -1,0 +1,4 @@
+TODO 
+
+figure out a way to search an artist and album and ultimately retrieve all of that album's tracks in order of track number. 
+
