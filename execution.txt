@@ -1,6 +1,6 @@
 TODO 
 
-figure out a way to search an artist and album and ultimately retrieve all of that album's tracks in order of track number. 
+think about how i'm going to be able to create an 'honest' ranking and web search and crawl all the album rating websites, and if it's even possible/worth it at all right now? could just create a list of 10-15 websites that have most years of albums, and use those websites for the album searches. 
 
 ========================================
 REFERENCES 
