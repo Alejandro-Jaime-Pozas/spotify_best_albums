@@ -3,6 +3,8 @@ TODO
 figure out a way to search an artist and album and ultimately retrieve all of that album's tracks in order of track number. 
 
 ========================================
+REFERENCES 
+========================================
 
 ADDING TRACKS TO PLAYLISTS: https://developer.spotify.com/documentation/web-api/reference/add-tracks-to-playlist 
     uris: string
@@ -11,3 +13,41 @@ ADDING TRACKS TO PLAYLISTS: https://developer.spotify.com/documentation/web-api/
     A maximum of 100 items can be added in one request.
     Note: it is likely that passing a large number of item URIs as a query parameter will exceed the maximum length of the request URI. When adding a large number of items, it is recommended to pass them in the request body, see below.
 
+
+========================================
+CONCEPT STAGE 
+========================================
+
+Spotify best albums of the year updates:
+Create app that searches web for best albums of the year, and create a spotify playlist with those albums…can be for future years, but also for past years (i.e. search best albums of 1995 online, compile list of sources, compile rankings of relevant sources, create playlist with albums ranked in order). Esto si me motiva un poco, porque:
+	1. Me evito manualmente checar mejores albums cada ano
+	2. Tendria una lista de playlists de best albums casi ilimitada para escuchar musica nueva y no aburrirme
+	3. Involucra python, quizas chatgpt, selenium, spotify api, muchos resources que me serviran
+
+
+	This app will take input of year range? Like from 1965 to 2000? Or how will it work?
+	
+	Need to either find a webpage that contains all the history of best albums by year, or find a way to:
+
+	For each year in range 1960-2022: 
+			1. Search for best albums of the year in google search
+			2. Somehow grab multiple websites (at least 3) from search which are already pre-filtered by chatgpt to account for only the most critically acclaimed albums (ie. No rock heavy lists, hip hop, jazz, etc)
+			3. For each website:
+				1) Take the artist and album and rank number
+			4. Compile a list of at most 100 albums with a ranking system based on a weighted average between all websites, 1 being the best album
+			5. Feed the artist, album, ranking data in order of ranking to spotify api and create a playlist named '{year} Best Albums' with all of those ranked albums, adding the number 1 album to the new playlist first and so on
+
+
+	Steps:
+		1. create app that searches google, and 
+		2. can then go into the website links in results, and 
+		3. then find only albums for the given year, and 
+		4. then store them in ranking order in a list, and 
+		5. then repeat process with other websites, and 
+		6. then aggregate all lists together, 
+		7. eliminate albums only mentioned in 1 list or some other filters for poor ranked albums, 
+		8. create weighted average of all rankings from all websites, 
+		9. store the final ranking in an ordered list by ranking that can then be fed to spotify API, 
+		10. create a new playlist on spotify with name of the year and best albums, 
+		11. add each of the albums in the final list into the playlist, in order of ranking. 
+		12. Repeat this for all the years…
