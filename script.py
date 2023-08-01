@@ -17,7 +17,7 @@ def get_google_search_results_urls(query):
     
     # Extract the URLs from the search results
     search_results = []
-    for link in soup.find_all("a"):
+    for link in soup.find_all("a"): # finding all <a/> html elements in code
         href = link.get("href")
         if href.startswith("/url?q="):
             url = href[7:].split("&")[0]  # Extract the URL from the href attribute
