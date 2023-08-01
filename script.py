@@ -8,12 +8,12 @@ def get_google_search_results_urls(query):
     
     # Send an HTTP request to the Google search page
     response = requests.get(search_url)
-    print(response.content)
+    # print(response.content)
     response.raise_for_status()  # Raise an exception for HTTP errors (4xx or 5xx)
     
     # Parse the HTML content using BeautifulSoup
     soup = BeautifulSoup(response.content, "html.parser")
-    print('='*300, soup)
+    # print('='*300, soup)
     
     # Extract the URLs from the search results
     search_results = []
@@ -30,8 +30,8 @@ def main():
     search_results = get_google_search_results_urls(query)
     
     # Print the extracted URLs; search_results is a list
-    # for url in search_results:
-        # print(url)
+    for url in search_results:
+        print(url)
 
 if __name__ == "__main__":
     main()
