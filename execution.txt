@@ -1,6 +1,8 @@
 TODO 
 
-think about how i'm going to be able to create an 'honest' ranking and web search and crawl all the album rating websites, and if it's even possible/worth it at all right now? could just create a list of 10-15 websites that have most years of albums, and use those websites for the album searches. 
+selenium is limited. some pages will require slideshow functionality, so selenium not option there. also, some pages only limited albums, need to click button to load more. or next page. 
+
+selenium not option..beautiful soup still best option. research other options for this, but will somehow need to just be able to get main text content, without html elements or links or anything, just pure text content, like copy pasting. 
 
 ========================================
 REFERENCES 
