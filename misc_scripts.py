@@ -1,34 +1,36 @@
-import requests, pyperclip
+import requests, pyperclip, re
 from bs4 import BeautifulSoup
 
+# include this later in for loop / while loop
+current_year = 2020
+
 # get a website's response content
-r = requests.get('https://www.acclaimedmusic.net/year/1954a.htm')
+r = requests.get(f'https://www.acclaimedmusic.net/year/{current_year}a.htm')
 # print(r.text)
 
-# # Beautiful soup tutorial
-soup = BeautifulSoup(r.text, "html.parser")
+if r.status_code == 200:
 
-# print(''.join([c for c in soup.prettify() if ord(c)<128]))
-print(soup.title)
+    # # Beautiful soup tutorial
+    soup = BeautifulSoup(r.text, "html.parser")#.prettify().encode('utf-8')
 
-with open('main_html.html', 'w', encoding='utf-8') as file:
-    file.write(''.join([c for c in soup.prettify() if ord(c)<128]))
+    soup_str = ''.join([c for c in soup.prettify() if ord(c)<128])
 
-# cleaned_prettified = ''.join(c for c in soup.prettify() if ord(c) < 128)
-# print(cleaned_prettified.p)
+    pattern = r'<td>\s*<a href="[^"]*">\s*(.*?)\s*</a>\s*</td>\s*<td>\s*<a href="[^"]*">\s*(.*?)\s*</a>\s*</td>'
+    matches = re.findall(pattern, soup_str, re.DOTALL)
 
-html_doc = """<html><head><title>The Dormouse's story</title></head>
-<body>
-<p class="title"><b>The Dormouse's story</b></p>
+    cleaned_data = []
 
-<p class="story">Once upon a time there were three little sisters; and their names were
-<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
-<a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
-<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
-and they lived at the bottom of a well.</p>
+    for match in matches:
+        artist = re.sub(r'[^a-zA-Z0-9\s]', ' ', match[0]).replace(' amp ', ' ').strip()
 
-<p class="story">...</p>
-"""
-soup2 = BeautifulSoup(html_doc, 'html.parser')
+        album = re.sub(r'[^a-zA-Z0-9\s]', ' ', match[1]).replace(' amp ', ' ').strip()
 
-# print(soup2.title)
+        cleaned_data.append((artist, album))
+
+    for artist, album in cleaned_data:
+        print("Artist:", artist)
+        print("Album:", album)
+        print()
+
+else:
+    print(r.status_code)
