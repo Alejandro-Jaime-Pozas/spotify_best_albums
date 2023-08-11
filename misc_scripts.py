@@ -1,8 +1,8 @@
-import requests, pyperclip, re
+import requests,  re
 from bs4 import BeautifulSoup
 
 # include this later in for loop / while loop
-current_year = 2020
+current_year = 1967
 
 # get a website's response content
 r = requests.get(f'https://www.acclaimedmusic.net/year/{current_year}a.htm')
