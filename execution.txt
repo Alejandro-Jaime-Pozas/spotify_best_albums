@@ -1,9 +1,3 @@
-TODO 
-
-selenium is limited. some pages will require slideshow functionality, so selenium not option there. also, some pages only limited albums, need to click button to load more. or next page. 
-
-selenium not option..beautiful soup still best option. research other options for this, but will somehow need to just be able to get main text content, without html elements or links or anything, just pure text content, like copy pasting. 
-
 ========================================
 REFERENCES 
 ========================================

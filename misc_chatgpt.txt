@@ -1,3 +1,0 @@
-so what i need to do is create a py script/app that does the following:
-
-search 'best albums year 2016' on google search, then go into at least 15 different search result links that contain the relevant data (if data is inaccurate, don't count as one of the 15 searches), then scrape the year, rank, artist, album data for the relevant webpage source, then store the scraped data in a dictionary with key/value pairs for the 4 scraped data points for each of the albums, and append all of the albums into an ordered list in ascending order by the album rank

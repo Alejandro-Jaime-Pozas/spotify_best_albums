@@ -2,7 +2,7 @@ import requests,  re
 from bs4 import BeautifulSoup
 
 # include this later in for loop / while loop
-current_year = 1967
+current_year = 1981
 
 # get a website's response content
 r = requests.get(f'https://www.acclaimedmusic.net/year/{current_year}a.htm')
