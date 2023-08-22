@@ -1,8 +1,9 @@
-import requests,  re
+import requests, re
 from bs4 import BeautifulSoup
 
-# include this later in for loop / while loop
-current_year = 1975
+# include this later in for loop / while loop with changing number, initial year 1954
+current_year = 1954
+end_year = 2020
 
 # get a website's response content
 r = requests.get(f'https://www.acclaimedmusic.net/year/{current_year}a.htm')
@@ -10,10 +11,10 @@ r = requests.get(f'https://www.acclaimedmusic.net/year/{current_year}a.htm')
 
 if r.status_code == 200:
 
-    # # Beautiful soup tutorial
+    # # Beautiful soup
     soup = BeautifulSoup(r.text, "html.parser")#.prettify().encode('utf-8')
 
-    soup_str = ''.join([c for c in soup.prettify() if ord(c)<128])
+    soup_str = ''.join([c for c in soup.prettify() if ord(c)<128]) # alphanum chars only
 
     pattern = r'<td>\s*<a href="[^"]*">\s*(.*?)\s*</a>\s*</td>\s*<td>\s*<a href="[^"]*">\s*(.*?)\s*</a>\s*</td>'
     matches = re.findall(pattern, soup_str, re.DOTALL)
@@ -32,17 +33,14 @@ if r.status_code == 200:
         print("Album:", album)
         print()
 
+    print(len(cleaned_data))
+
 else:
     print(r.status_code)
 
-
-    # TODO
-    # need to connect to spotify api and handle all of the requests from here:
-        # GET oauth 2.0 code
-        # POST oath 2.0 code for token
-    # once i have the token, can do whatever i need to do
-    # need to check if can access token for longer time if allowing the 'app' access to my spotify acct, which is the oauth window that pops up for spotify login..
-    # follow postman requests i've created to fetch them here in python
+# need to connect to spotify api and handle all of the requests from here:
+    # GET oauth 2.0 code
+    # POST oath 2.0 code for token
 
 
 	# Steps:
