@@ -19,7 +19,7 @@ refresh_token = 'AQDI3fChzjaRvRwpiE928Z9QHgpt918U0u2gbw418aJHBWnG41pgTG_ZXwqlLma
 def create_new_playlist(year):
   url = "https://api.spotify.com/v1/users/alexjaime/playlists"
   payload = json.dumps({
-    "name": f"1954 Best Albums"
+    "name": f"{year} Best Albums"
   })
   headers = {
     'Content-Type': 'application/json',
@@ -36,8 +36,8 @@ def create_new_playlist(year):
 # FOR EACH ALBUM
 # SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT  
   # will need to replace ' ' with '%20' for spaces in searches
-def add_tracks_to_playlist(playlist_id):
-  url = f"https://api.spotify.com/v1/search/?q=wilco%20yankee%20hotel%20foxtrot&type=album&limit=1"
+def add_tracks_to_playlist(playlist_id, album):
+  url = f"https://api.spotify.com/v1/search/?q={album}&type=album&limit=1"
   headers = {'Authorization': f'Bearer {access_token}'}
   search = requests.request("GET", url, headers=headers)
   # print(search.text)
