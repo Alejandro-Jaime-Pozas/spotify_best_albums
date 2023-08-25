@@ -1,6 +1,6 @@
 import requests
 # get manually from copy pasting postman url to browser and getting the code in query params
-api_code = """AQCUanL815D1OcqRaaOx7fxI_2UxZp0Kj0BZzyFpbNrwH83EpPv2lYEjqGqYY5Jn_bRXP9YMDrz0hLZBO9SrfyiXMq4ksMFtVrs14_y9mE4tBgohkv8b2gwRiTgE4p-a32M0yJYqyVVrO8f8mvUgHWZBAwo70IljitBQ2kPWu6blCPuXUzzsgMG1LWWXiJdFP4MpiNONdzUAeTD-qIhFEx9uCMXGM7ixYFp_4DR-h4HIMmwQHO4yoiNARRp9Rg"""
+api_code = """AQBRvFbuHtbga471GYsoQNlnooJZclPlx-bXpl0gDltacrwKJdj3gqvBMqKTQVcPE_0M-PswItsGU5Uk_IHMhEKaR7Im9jEPSdP98mMdwzF8FTC3S6KnVCAAM6MjDD0XPJdT6BivYa34DEoSn8S3nP3symwe772pMBo_bundVAcSIqQzjdqNzywB_GBrKNCyFjFWVi9iIEWtgZleGSTojH9jCqDqr71s6Rr3CZ6FkntElfquAXQvlApr0SrL8g"""
 
 # use code to get the access token and refresh token
 url = "https://accounts.spotify.com/api/token"
@@ -14,17 +14,11 @@ headers = {
 def get_tokens():
     response = requests.request("POST", url, headers=headers, data=payload)
     if response.status_code == 200:
-        access_tokens = response.json() 
-        access_token = access_tokens['access_token']
-        refresh_token = access_tokens['refresh_token'] # use this code to replace original api_code once the access_token expires in 1hr, only need to include grant_type=refresh_token&refresh_token={refresh_token} in payload for this
-
-        print(access_token)
-        print()
-        print(api_code)
-        return access_tokens
+        access_tokens = response.json() # use refresh_token key code to replace original api_code once the access_token expires in 1hr, only need to include grant_type=refresh_token&refresh_token={refresh_token} in payload for this
+        return access_tokens # to get the actual tokens: access_tokens['access_token'] or ['refresh_token']
 
     else: 
         print(response.status_code)
         return None 
 
-print(get_tokens())
+# print(get_tokens())

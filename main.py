@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 current_year = 1954
 end_year = 2020
 
-# get a website's response content
+# get website's response content
 r = requests.get(f'https://www.acclaimedmusic.net/year/{current_year}a.htm')
 # print(r.text)
 
@@ -23,17 +23,15 @@ if r.status_code == 200:
 
     for match in matches:
         artist = re.sub(r'[^a-zA-Z0-9\s]', ' ', match[0]).replace(' amp ', ' ').strip()
-
         album = re.sub(r'[^a-zA-Z0-9\s]', ' ', match[1]).replace(' amp ', ' ').strip()
+        cleaned_data.append(f"{artist} {album}")
+    # for artist, album in cleaned_data:
+    #     print("Artist:", artist)
+    #     print("Album:", album)
+    #     print()
+    print(cleaned_data)
 
-        cleaned_data.append((artist, album))
-
-    for artist, album in cleaned_data:
-        print("Artist:", artist)
-        print("Album:", album)
-        print()
-
-    print(len(cleaned_data))
+    
 
 else:
     print(r.status_code)
