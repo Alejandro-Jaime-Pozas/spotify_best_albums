@@ -10,7 +10,7 @@ from spotify_keys import get_tokens, api_code
 
 
 # TEMPORARY DELETE LATER
-access_token = 'BQDBYZSTFtWFsACMdudyJOr0fwok_Qkho9_sQykMRx1quTLIRbx2ngjptICC5ZVbwdqVqLTB_7XwzZwcMER0Niu4oKwl2Ae-tuAR8RQ0SY_hBR25kA68jFJ_CXh-1QwiNTGan3iSwURfOG-Kv5B0TblpgYIFYfb-Q1GF6L81-Bwtlv-vUzQuWouMzRCe29h1vZIXSHV2qxjkTdgpnuz-pluJYRA-23FqoXaeZin9t6cT_rOh0j_soiSM'
+access_token = 'BQBsxotnCtKv0rXUmXsk932NaMNwMjQUna1HBptsXGIxSJuc3_aadM2a7AX6PbweLb7xc75mPz9Kn4SlTO8NM_AkI9UDEpx29EAFZ-1Beurk13XY5sd_yVYS4mSUfMxbeBU6aq0HY0KWj1k6xA1DJF8WxiMqPCOV8TD0AyBSmGG3NsHEQCKlvBVSFbjds5tAKXZPml2lxpfXD6Jv8bsYMT3tqqIYCFwDdf09HAYwUl2hoMRgy9GK3bOx'
 
 refresh_token = 'AQDI3fChzjaRvRwpiE928Z9QHgpt918U0u2gbw418aJHBWnG41pgTG_ZXwqlLmaz--0Jhx-iHLSt5CW4wyNe-JU-hFaFGqg23hBpezZW1tcxFLcxJECHvoFQH2XFSphF0js'
 
@@ -34,16 +34,19 @@ def create_new_playlist(year):
 
 
 # FOR EACH ALBUM
-# SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT  
-  # will need to replace ' ' with '%20' for spaces in searches
 def add_tracks_to_playlist(playlist_id, album):
+
+  # SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT  
   url = f"https://api.spotify.com/v1/search/?q={album}&type=album&limit=1"
   headers = {'Authorization': f'Bearer {access_token}'}
   search = requests.request("GET", url, headers=headers)
   # print(search.text)
   search_json = search.json() 
   album_id = search_json['albums']['items'][0]['id']
+  artist_name = search_json['albums']['items'][0]['artists'][0]['name']
+  album_name = search_json['albums']['items'][0]['name']
   # print(album_id)
+  print(f'''SPOTIFY SEARCH: {artist_name}, {album_name}''')
 
   # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER 
   url = f"https://api.spotify.com/v1/albums/{album_id}"
