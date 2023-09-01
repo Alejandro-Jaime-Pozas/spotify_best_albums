@@ -7,6 +7,7 @@ TODO
         - for main code:
                 - only add matching albums on spotify, if not found don't add (but store in text file missing album)
                 - ideally, only add original songs from albums, no deluxe/ultimate/bonus/live tracks
+                        - maybe to avoid deluxe albums, return 2-3 album results, and grab best matching album
 
 Edge cases:
 
