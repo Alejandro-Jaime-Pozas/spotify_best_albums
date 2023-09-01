@@ -1,10 +1,12 @@
 fully working, may need to clean up searches that dont match, or 
 leave as is and clean up manually in spotify while storing the albums that dont match from code. missing spotify access_token functionality, will need to check for refresh_token to make that work, will need to wait 1hr for refresh to go into effect to test out
 
-TODO - 
+TODO
         - fix timeout error occurring related to requests package not communicating w/spotify api correctly resuling in timeout error
-        - check something like the JW similarity fn in SQL but for python, this to make sure albums added are correct
         - create a word/excel file or csv to store all artists and album and year info
+        - for main code:
+                - only add matching albums on spotify, if not found don't add (but store in text file missing album)
+                - ideally, only add original songs from albums, no deluxe/ultimate/bonus/live tracks
 
 Edge cases:
 

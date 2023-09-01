@@ -6,11 +6,11 @@ from spotify import access_token, create_new_playlist, add_tracks_to_playlist
 # fully working, may need to clean up searches that dont match, or leave as is and clean up manually in spotify while storing the albums that dont match from code. missing spotify access_token functionality, will need to check for refresh_token to make that work, will need to wait 1hr for refresh to go into effect to test out
 
 # include this later in for loop / while loop with changing number, initial year 1954
-year = 1954
+year = 1995
 end_year = 2020
 
 # FOR EACH YEAR
-for year in range(1961, end_year): # CHANGE TO END_YEAR
+for year in range(year, end_year): # CHANGE TO END_YEAR
     print('='*50)
     print(year)
 
