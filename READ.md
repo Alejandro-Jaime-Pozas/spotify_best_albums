@@ -1,13 +1,13 @@
-fully working, may need to clean up searches that dont match, or 
-leave as is and clean up manually in spotify while storing the albums that dont match from code. missing spotify access_token functionality, will need to check for refresh_token to make that work, will need to wait 1hr for refresh to go into effect to test out
+fully working, may need to clean up searches that dont match, or leave as is and clean up manually in spotify while storing the albums that dont match from code.
 
 TODO
-        - fix timeout error occurring related to requests package not communicating w/spotify api correctly resuling in timeout error
-        - create a word/excel file or csv to store all artists and album and year info
         - for main code:
                 - only add matching albums on spotify, if not found don't add (but store in text file missing album)
                 - ideally, only add original songs from albums, no deluxe/ultimate/bonus/live tracks
                         - maybe to avoid deluxe albums, return 2-3 album results, and grab best matching album
+        - create code to always get a new token once the old token expires
+        - fix timeout error occurring related to requests package not communicating w/spotify api correctly resuling in timeout error
+        - create a word/excel file or csv to store all artists and album and year info
 
 Edge cases:
 

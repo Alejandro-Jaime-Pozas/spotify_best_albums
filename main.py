@@ -44,4 +44,4 @@ for year in range(year, end_year): # CHANGE TO END_YEAR
             print()
 
     else:
-        print(albums_by_year.status_code)
+        print(f"status code: {albums_by_year.status_code} - for year {year}")

@@ -1,18 +1,17 @@
 import requests, json
-from spotify_keys import get_tokens, api_code
+from spotify_keys import get_token
 
 # WILL NEED TO GET THE CODE FIRST, THEN USE CODE TO GET ACCESS_TOKEN WHICH EXPIRES IN 1HR, THEN TAKE THE REFRESH_TOKEN IN RESPONSE OF ACCESS_TOKEN AND USE IT IN PLACE OF THE CODE KEY TO MAKE ANOTHER ACCESS_TOKEN REQUEST BUT WITH REFRESH_TOKEN VS GET CODE. REPEAT AS NEEDED. 
 
-# access_tokens = get_tokens() # this returns a dict
-# while access_tokens is not None: # will prob have to change this to time 3600 seconds from when get_tokens() gets called, to 
+# access_token = get_token() # this returns a dict
+# while access_tokens is not None: # will prob have to change this to time 3600 seconds from when get_tokens() gets called, so that i can check whenever the token has expired, just get new token
 #   access_token = access_tokens['access_token']
 #   refresh_token = access_tokens['refresh_token']
 
 
-# TEMPORARY DELETE LATER
-access_token = 'BQCTXLu6JRul26YFE2r91JuKoE5SnFfepPviNHG_6MJfJdpY59NLU2kdgH1K8grCORdr2lId4lOZnZ-e9pkCZzibIRR-0-OcYpcpnUyOEAAjBOtTJ7bYDpOlNnEY1vDjz7n7Nv2i9lV2A57aL1G6mWdpiWneA7JsQ9_hSS82vlU9KYAmqcKd35D6rRYF-KK12Wqzxm3qSqlQFpb4W_lsEuh7H-u-a2OO6UugRygV-LEfY7rDEkbJiwld'
+# TEMPORARY DELETE LATER when replacing with get_token
+access_token = 'BQCKFCDwTSLEVhv-DYz3sE5zTV3cn7AuBym01_ainyXoWdNiDeSy8T6n8FdnWLeEugLQBdxq5gWWLJfwplne4SGN-a0SWgZ7NrLk34lfs_eplkoOdZW6N4sXlPnsKiIhPpzgg8iBDJegjVxhGbyQs7nHGcyaP_Zp0FBR7sdkHpOciBcGvd61mBk-dwFMBNPlBV_TrQLEw7XTqnt1565RVPIPBQojMbCvA3NW_-g3o0zvdWLBJKpkXohg'
 
-refresh_token = 'AQCjPSNEq0pAsaqnbYF7webhgmJ9yIG2_5GGPZsttu2qJ9iS5_eM4KW5JOp_L_5OUNdjJzCl72dZhSv4JWkmAQ2BBw_ih6D4dJnHCfg9nH0aHZxxxevucIdYmNWl_Y-SHO0'
 
 # FOR EACH YEAR
 # CREATE A NEW PLAYLIST
