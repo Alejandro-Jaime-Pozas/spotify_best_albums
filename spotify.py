@@ -4,7 +4,7 @@ from spotify_keys import get_token
 # WILL NEED TO GET THE CODE FIRST, THEN USE CODE TO GET ACCESS_TOKEN WHICH EXPIRES IN 1HR, THEN TAKE THE REFRESH_TOKEN IN RESPONSE OF ACCESS_TOKEN AND USE IT IN PLACE OF THE CODE KEY TO MAKE ANOTHER ACCESS_TOKEN REQUEST BUT WITH REFRESH_TOKEN VS GET CODE. REPEAT AS NEEDED. 
 
 # access_token = get_token() # this returns a dict
-# while access_tokens is not None: # will prob have to change this to time 3600 seconds from when get_tokens() gets called, so that i can check whenever the token has expired, just get new token
+# while access_tokens is not None: # need to change this to either get new token every time there is an album search (within the innermost for loop scope) or at the year scope, or calculate 3600 seconds from when token is generated, and fetch a new token when time expires...
 #   access_token = access_tokens['access_token']
 #   refresh_token = access_tokens['refresh_token']
 

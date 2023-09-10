@@ -3,7 +3,7 @@ import requests
 # should remain the same, NO NEED TO UPDATE as long as oauth user has granted permission
 refresh_token = "AQCjPSNEq0pAsaqnbYF7webhgmJ9yIG2_5GGPZsttu2qJ9iS5_eM4KW5JOp_L_5OUNdjJzCl72dZhSv4JWkmAQ2BBw_ih6D4dJnHCfg9nH0aHZxxxevucIdYmNWl_Y-SHO0"
 
-# post request requirements to get a new access token from the refresh token; uses encoded client_id:client_secret
+# post request requirements to get a new access token from the refresh token; uses encoded client_id:client_secret obatined from postman snippet
 url = "https://accounts.spotify.com/api/token"
 payload = f'grant_type=refresh_token&refresh_token={refresh_token}'
 headers = {
@@ -18,7 +18,7 @@ def get_token():
     if response.status_code == 200:
         access_token = response.json()
         # print(access_tokens)
-        return access_token # to get the actual token: access_token['access_token']
+        return access_token['access_token'] # to get the actual token: access_token['access_token']
     else: 
         print(response.status_code)
         return None 
