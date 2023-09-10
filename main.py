@@ -1,9 +1,12 @@
 import requests, re
 from bs4 import BeautifulSoup
 from spotify_keys import get_token
-from spotify import access_token, create_new_playlist, add_tracks_to_playlist
+from spotify import create_new_playlist, add_tracks_to_playlist
 
-# fully working, may need to clean up searches that dont match, or leave as is and clean up manually in spotify while storing the albums that dont match from code. missing spotify access_token functionality, will need to check for refresh_token to make that work, will need to wait 1hr for refresh to go into effect to test out
+# fully working, may need to clean up searches that dont match, or leave as is and clean up manually in spotify while storing the albums that dont match from code. 
+
+# TODO
+    # get access token at the year level...takes 1hr...for purposes of this script, year level is best
 
 # include this later in for loop / while loop with changing number, initial year 1954
 year = 1995
@@ -34,14 +37,17 @@ for year in range(year, end_year): # CHANGE TO END_YEAR
             artists_albums.append(f"{artist}%20{album}")
         # print(artists_albums)
 
+        # GET THE ACCESS TOKEN FOR SPOTIFY API
+        access_token = get_token()
+
         # CREATE A PLAYLIST FOR CURRENT YEAR
-        playlist_id = create_new_playlist(year)
+        playlist_id = create_new_playlist(year, access_token)
 
         # FOR EACH ALBUM IN ARTISTS_ALBUMS SEARCH THE ALBUM AND ADD TRACKS TO NEW PLAYLIST
         for album in artists_albums:
             print(f'''REAL ALBUM: {album.replace('%20', ' ')} - YEAR: {year}''')
-            add_tracks_to_playlist(playlist_id, album)
+            add_tracks_to_playlist(playlist_id, album, access_token)
             print()
 
     else:
-        print(f"status code: {albums_by_year.status_code} - for year {year}")
+        print(f"status code: {albums_by_year.status_code} - for year {year} in acclaimed music website")

@@ -1,21 +1,13 @@
 import requests, json
 from spotify_keys import get_token
 
-# WILL NEED TO GET THE CODE FIRST, THEN USE CODE TO GET ACCESS_TOKEN WHICH EXPIRES IN 1HR, THEN TAKE THE REFRESH_TOKEN IN RESPONSE OF ACCESS_TOKEN AND USE IT IN PLACE OF THE CODE KEY TO MAKE ANOTHER ACCESS_TOKEN REQUEST BUT WITH REFRESH_TOKEN VS GET CODE. REPEAT AS NEEDED. 
-
-# access_token = get_token() # this returns a dict
-# while access_tokens is not None: # need to change this to either get new token every time there is an album search (within the innermost for loop scope) or at the year scope, or calculate 3600 seconds from when token is generated, and fetch a new token when time expires...
-#   access_token = access_tokens['access_token']
-#   refresh_token = access_tokens['refresh_token']
-
-
-# TEMPORARY DELETE LATER when replacing with get_token
-access_token = 'BQCKFCDwTSLEVhv-DYz3sE5zTV3cn7AuBym01_ainyXoWdNiDeSy8T6n8FdnWLeEugLQBdxq5gWWLJfwplne4SGN-a0SWgZ7NrLk34lfs_eplkoOdZW6N4sXlPnsKiIhPpzgg8iBDJegjVxhGbyQs7nHGcyaP_Zp0FBR7sdkHpOciBcGvd61mBk-dwFMBNPlBV_TrQLEw7XTqnt1565RVPIPBQojMbCvA3NW_-g3o0zvdWLBJKpkXohg'
+# # TEMPORARY DELETE LATER when replacing with get_token. IF I LEAVE THIS, CODE SHOULD STILL WORK
+# access_token = 'BQCKFCDwTSLEVhv-DYz3sE5zTV3cn7AuBym01_ainyXoWdNiDeSy8T6n8FdnWLeEugLQBdxq5gWWLJfwplne4SGN-a0SWgZ7NrLk34lfs_eplkoOdZW6N4sXlPnsKiIhPpzgg8iBDJegjVxhGbyQs7nHGcyaP_Zp0FBR7sdkHpOciBcGvd61mBk-dwFMBNPlBV_TrQLEw7XTqnt1565RVPIPBQojMbCvA3NW_-g3o0zvdWLBJKpkXohg'
 
 
 # FOR EACH YEAR
 # CREATE A NEW PLAYLIST
-def create_new_playlist(year):
+def create_new_playlist(year, access_token):
   url = "https://api.spotify.com/v1/users/alexjaime/playlists"
   payload = json.dumps({
     "name": f"{year} Best Albums"
@@ -33,7 +25,7 @@ def create_new_playlist(year):
 
 
 # FOR EACH ALBUM
-def add_tracks_to_playlist(playlist_id, album):
+def add_tracks_to_playlist(playlist_id, album, access_token):
 
   # SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT  
   url = f"https://api.spotify.com/v1/search/?q={album}&type=album&limit=1"

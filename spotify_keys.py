@@ -21,6 +21,6 @@ def get_token():
         return access_token['access_token'] # to get the actual token: access_token['access_token']
     else: 
         print(response.status_code)
-        return None 
+        return response.status_code 
 
 print(get_token())
