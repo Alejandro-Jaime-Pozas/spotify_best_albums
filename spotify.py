@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, difflib
 from spotify_keys import get_token
 
 
@@ -24,32 +24,41 @@ def create_new_playlist(year, access_token):
 # FOR EACH ALBUM
 def add_tracks_to_playlist(playlist_id, artist_album, year, access_token):
 
-  # SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT  
-  url = f"https://api.spotify.com/v1/search/?q={artist_album}&type=album&limit=1"
+  # SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT AND RETURN MULTIPLE ALBUM RESULTS
+  url = f"https://api.spotify.com/v1/search/?q={artist_album}&type=album&limit=1" # CHANGE LIMIT HERE!!
   headers = {'Authorization': f'Bearer {access_token}'}
   search = requests.request("GET", url, headers=headers)
   # print(search.text)
   search_json = search.json() 
-  album_id = search_json['albums']['items'][0]['id']
-  artist_name = search_json['albums']['items'][0]['artists'][0]['name'] # may need to change encoding here
-  album_name = search_json['albums']['items'][0]['name'] # may need to change encoding here
-  # print(album_id)
-  acclaimed_music_album_name = artist_album.replace('%20', ' ')
-  spotify_search_album_name = f'{artist_name} {album_name}'
+  results_list = search_json['albums']['items'] # contains multiple album results for search query
 
-  # CHECK SIMILARITY BW THE TWO ALBUMS
+  acclaimed_music_album_name = artist_album.replace('%20', ' ')
+
+  # FUNCTION TO CHECK SIMILARITY BW ACCLAIMED VS SPOTIFY
   def similarity_score(str1, str2):
     # Convert the strings to lowercase to make the comparison case-insensitive
     str1 = str1.lower()
     str2 = str2.lower()
     # Calculate the similarity ratio between the two strings
-    similarity_ratio = difflib.SequenceMatcher(None, str1, str2).ratio()
+    similarity_ratio = difflib.SequenceMatcher(None, str1, str2).quick_ratio()
     return similarity_ratio
+  
+  # FOR EACH ALBUM RESULT, COLLECT ITS SIMILARITY TO ACCLAIMED MUSIC ALBUM, RETURN THE HIGHEST RESULT MATCH
+  album_id = search_json['albums']['items'][0]['id']
+  artist_name = search_json['albums']['items'][0]['artists'][0]['name'] # may need to change encoding here
+  album_name = search_json['albums']['items'][0]['name'] # may need to change encoding here
+  # print(album_id)
+  spotify_search_album_name = f'''{artist_name} {album_name}'''
+  # PRINT RESULTS FROM BOTH SITES, ALONG W/SIMILARITY
   print(f'''REAL ALBUM: {acclaimed_music_album_name} - YEAR: {year}''')
-  print(f'''SPOTIFY SEARCH: {spotify_search_album_name} - SIMILARITY: {""}''')
+  try:
+    print(f'''SPOTIFY SEARCH: {spotify_search_album_name}''')
+  except UnicodeEncodeError as e:
+    print('Unable to print due to Unicode Error!!!')
+  print(f'''SIMILARITY: {similarity_score(acclaimed_music_album_name, spotify_search_album_name):.2f}''')
   print()
 
-  # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER 
+  # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER for the highest match
   url = f"https://api.spotify.com/v1/albums/{album_id}"
   headers = {'Authorization': f'Bearer {access_token}'}
   album_tracks = requests.request("GET", url, headers=headers)

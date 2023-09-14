@@ -1,4 +1,4 @@
-import requests, re, difflib
+import requests, re
 from bs4 import BeautifulSoup
 from spotify_keys import get_token
 from spotify import create_new_playlist, add_tracks_to_playlist
