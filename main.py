@@ -6,14 +6,10 @@ from spotify import create_new_playlist, add_tracks_to_playlist
 # fully working, may need to clean up searches that dont match, or leave as is and clean up manually in spotify while storing the albums that dont match from code. 
 
 # TODO
-#         - for main code:
-#                 - only add matching albums on spotify, if not found don't add (but store in text file missing album)
-#                 - ideally, only add original songs from albums, no deluxe/ultimate/bonus/live tracks
-#                         - maybe to avoid deluxe albums, return 2-3 album results, and grab best matching album
 #         - fix timeout error occurring related to requests package not communicating w/spotify api correctly resuling in timeout error
 #         - create a word/excel file or csv to store all artists and album and year info, and whether there was a successful result when searching for album
 
-# include this later in for loop / while loop with changing number, initial year 1954
+# initial year 1954
 year = 1997
 end_year = 2020
 

@@ -67,7 +67,8 @@ def add_tracks_to_playlist(playlist_id, artist_album, year, access_token):
 
   # IF SIMILARTY SCORE IS BELOW X AMOUNT, DON'T ADD THE ALBUM
   if top_album_score < 0.35:
-    print(f'there is no match for this album {acclaimed_music_album_name}')
+    print(f'there is no match for this album: {acclaimed_music_album_name}')
+    return None 
   
   # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER for the highest match
   url = f"https://api.spotify.com/v1/albums/{top_album_id}"
