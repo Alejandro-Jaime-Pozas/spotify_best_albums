@@ -7,8 +7,7 @@ from excel_file import add_album_data_excel
 # fully working, may need to clean up searches that dont match, or leave as is and clean up manually in spotify while storing the albums that dont match from code. 
 
 # TODO
-#   - fix timeout error occurring related to requests package not communicating w/spotify api correctly resuling in timeout error
-#   - create a word/excel file or csv to store all artists and album and year info, and whether there was a successful result when searching for album
+#   - test out minimum 10 years of data for albums, and check which ones match/dont match...may need to change the similarity funcion for a better one if albums are not matching correclty. 
 
 # initial year 1954
 year = 1950
