@@ -1,17 +1,21 @@
-import requests, re
+import requests, re, openpyxl
 from bs4 import BeautifulSoup
 from spotify_keys import get_token
 from spotify import create_new_playlist, add_tracks_to_playlist
+from excel_file import add_album_data_excel
 
 # fully working, may need to clean up searches that dont match, or leave as is and clean up manually in spotify while storing the albums that dont match from code. 
 
 # TODO
-#         - fix timeout error occurring related to requests package not communicating w/spotify api correctly resuling in timeout error
-#         - create a word/excel file or csv to store all artists and album and year info, and whether there was a successful result when searching for album
+#   - fix timeout error occurring related to requests package not communicating w/spotify api correctly resuling in timeout error
+#   - create a word/excel file or csv to store all artists and album and year info, and whether there was a successful result when searching for album
 
 # initial year 1954
-year = 1997
-end_year = 2020
+year = 1950
+end_year = 1953
+
+# create empty list to later add all data
+list_data = []
 
 # FOR EACH YEAR
 for year in range(year, end_year): # CHANGE TO END_YEAR
@@ -46,7 +50,10 @@ for year in range(year, end_year): # CHANGE TO END_YEAR
 
         # FOR EACH ALBUM IN ARTISTS_ALBUMS SEARCH THE ALBUM AND ADD TRACKS TO NEW PLAYLIST
         for artist_album in artists_albums_search:
-            add_tracks_to_playlist(playlist_id, artist_album, year, access_token)
+            add_tracks_to_playlist(playlist_id, artist_album, year, list_data, access_token)
 
     else:
         print(f"status code: {albums_by_year.status_code} - for year {year} in acclaimed music website")
+
+# ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
+add_album_data_excel(list_data)

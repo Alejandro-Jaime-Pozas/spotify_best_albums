@@ -22,7 +22,7 @@ def create_new_playlist(year, access_token):
 
 
 # FOR EACH ALBUM
-def add_tracks_to_playlist(playlist_id, artist_album, year, access_token):
+def add_tracks_to_playlist(playlist_id, artist_album, year, list_data, access_token):
 
   # SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT AND RETURN MULTIPLE ALBUM RESULTS
   url = f"https://api.spotify.com/v1/search/?q={artist_album}&type=album&limit=6" # CHANGE LIMIT HERE!!
@@ -34,6 +34,7 @@ def add_tracks_to_playlist(playlist_id, artist_album, year, access_token):
 
   acclaimed_music_album_name = artist_album.replace('%20', ' ')
 
+
   # FUNCTION TO CHECK SIMILARITY BW ACCLAIMED VS SPOTIFY
   def similarity_score(str1, str2):
     # Convert the strings to lowercase to make the comparison case-insensitive
@@ -44,7 +45,6 @@ def add_tracks_to_playlist(playlist_id, artist_album, year, access_token):
     return similarity_ratio
   
   top_album_score = 0
-  top_album_id = None 
   # FOR EACH ALBUM RESULT, COLLECT ITS SIMILARITY TO ACCLAIMED MUSIC ALBUM, RETURN THE HIGHEST RESULT MATCH
   for result in results_list:
     album_id = result['id']
@@ -62,14 +62,20 @@ def add_tracks_to_playlist(playlist_id, artist_album, year, access_token):
     print(f'''SIMILARITY: {similarity:.2f}''')
     print()
     if similarity > top_album_score:
-      top_album_score = similarity
       top_album_id = album_id
+      top_album_spotify_name = spotify_search_album_name
+      top_album_score = similarity
+
+  # ADD THE ALBUM DATA TO A LIST AS TUPLE, THEN 
+  data = top_album_id, top_album_spotify_name, acclaimed_music_album_name, top_album_score, True if top_album_score > 0.35 else False, year
+  list_data.append(data)
 
   # IF SIMILARTY SCORE IS BELOW X AMOUNT, DON'T ADD THE ALBUM
   if top_album_score < 0.35:
     print(f'there is no match for this album: {acclaimed_music_album_name}')
     return None 
   
+
   # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER for the highest match
   url = f"https://api.spotify.com/v1/albums/{top_album_id}"
   headers = {'Authorization': f'Bearer {access_token}'}
