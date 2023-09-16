@@ -11,7 +11,7 @@ from excel_file import add_album_data_excel
 
 # initial year 1954
 year = 1950
-end_year = 1953
+end_year = 2020
 
 # create empty list to later add all data
 list_data = []
@@ -51,8 +51,12 @@ for year in range(year, end_year): # CHANGE TO END_YEAR
         for artist_album in artists_albums_search:
             add_tracks_to_playlist(playlist_id, artist_album, year, list_data, access_token)
 
+        # ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
+        add_album_data_excel(list_data)
+        
+
     else:
         print(f"status code: {albums_by_year.status_code} - for year {year} in acclaimed music website")
 
-# ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
-add_album_data_excel(list_data)
+# # ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
+# add_album_data_excel(list_data)
