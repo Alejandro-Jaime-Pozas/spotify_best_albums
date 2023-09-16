@@ -45,8 +45,8 @@ def add_tracks_to_playlist(playlist_id, artist_album, year, list_data, access_to
     return similarity_ratio
   
   top_album_score = 0
-  top_album_id = "None" 
-  top_album_spotify_name = "None" 
+  top_album_id = None 
+  top_album_spotify_name = None 
   # FOR EACH ALBUM RESULT, COLLECT ITS SIMILARITY TO ACCLAIMED MUSIC ALBUM, RETURN THE HIGHEST RESULT MATCH
   for result in results_list:
     album_id = result['id']
@@ -73,7 +73,7 @@ def add_tracks_to_playlist(playlist_id, artist_album, year, list_data, access_to
   list_data.append(data)
 
   # IF SIMILARTY SCORE IS BELOW X AMOUNT, DON'T ADD THE ALBUM
-  if top_album_score < 0.35 or top_album_id == "None":
+  if top_album_score < 0.35 or top_album_id == None:
     print(f'there is no match for this album: {acclaimed_music_album_name}')
     return None 
   
