@@ -4,14 +4,12 @@ from spotify_keys import get_token
 from spotify import create_new_playlist, add_tracks_to_playlist
 from excel_file import add_album_data_excel
 
-# fully working, may need to clean up searches that dont match, or leave as is and clean up manually in spotify while storing the albums that dont match from code. 
-
 # TODO
-#   - test out minimum 10 years of data for albums, and check which ones match/dont match...may need to change the similarity funcion for a better one if albums are not matching correclty. 
+#   - need to find a way to reduce the correct albums in black text below 460% similarity by increasing their similarity, and accounting for edge cases with red text above 460% so that they don't create a match
 
-# initial year 1954
+# initial year 1950
 year = 1950
-end_year = 2020
+end_year = 1960
 
 # create empty list to later add all data
 list_data = []

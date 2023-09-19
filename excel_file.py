@@ -31,4 +31,4 @@ def add_album_data_excel(list_data):
     # Close the workbook
     workbook.close()
 
-    print("Excel file created successfully.")
+    print("Excel file 'spotify_album_data' created successfully.")

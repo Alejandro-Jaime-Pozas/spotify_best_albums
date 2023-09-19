@@ -1,6 +1,5 @@
-import requests, json, difflib
-from spotify_keys import get_token
-
+import requests, re, json, difflib
+from steps_add_to_playlist import album_search_list, similarity_score, get_album_tracks, add_tracks_to_spotify
 
 # FOR EACH YEAR
 # CREATE A NEW PLAYLIST
@@ -25,40 +24,26 @@ def create_new_playlist(year, access_token):
 def add_tracks_to_playlist(playlist_id, artist_album, year, list_data, access_token):
 
   # SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT AND RETURN MULTIPLE ALBUM RESULTS
-  url = f"https://api.spotify.com/v1/search/?q={artist_album}&type=album&limit=6" # CHANGE LIMIT HERE!!
-  headers = {'Authorization': f'Bearer {access_token}'}
-  search = requests.request("GET", url, headers=headers)
-  # print(search.text)
-  search_json = search.json() 
-  results_list = search_json['albums']['items'] # contains multiple album results for search query
-
+  spotify_results_list = album_search_list(artist_album, access_token)
   acclaimed_music_album_name = artist_album.replace('%20', ' ')
-
-
-  # FUNCTION TO CHECK SIMILARITY BW ACCLAIMED VS SPOTIFY
-  def similarity_score(str1, str2):
-    # Convert the strings to lowercase to make the comparison case-insensitive
-    str1 = str1.lower()
-    str2 = str2.lower()
-    # Calculate the similarity ratio between the two strings
-    similarity_ratio = difflib.SequenceMatcher(None, str1, str2).quick_ratio()
-    return similarity_ratio
+  
   
   top_album_score = 0
   top_album_id = None 
   top_album_spotify_name = None 
   # FOR EACH ALBUM RESULT, COLLECT ITS SIMILARITY TO ACCLAIMED MUSIC ALBUM, RETURN THE HIGHEST RESULT MATCH
-  for result in results_list:
+  for result in spotify_results_list:
     album_id = result['id']
     artist_name = result['artists'][0]['name'] # may need to change encoding here
     album_name = result['name'] # may need to change encoding here
+    album_year = int(result['release_date'][:4])
     # print(album_id)
     spotify_search_album_name = f'''{artist_name} {album_name}'''
-    similarity = similarity_score(acclaimed_music_album_name, spotify_search_album_name)
+    similarity = similarity_score(acclaimed_music_album_name, spotify_search_album_name, year, album_year)
     # PRINT RESULTS FROM BOTH SITES, ALONG W/SIMILARITY
     print(f'''REAL ALBUM: {acclaimed_music_album_name} - YEAR: {year}''')
     try:
-      print(f'''SPOTIFY SEARCH: {spotify_search_album_name}''')
+      print(f'''SPOTIFY SEARCH: {spotify_search_album_name} - YEAR: {album_year}''')
     except UnicodeEncodeError as e:
       print('Unable to print due to Unicode Error!!!')
     print(f'''SIMILARITY: {similarity:.2f}''')
@@ -76,24 +61,11 @@ def add_tracks_to_playlist(playlist_id, artist_album, year, list_data, access_to
   if top_album_score < 0.35 or top_album_id == None:
     print(f'there is no match for this album: {acclaimed_music_album_name}')
     return None 
-  
 
   # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER for the highest match
-  url = f"https://api.spotify.com/v1/albums/{top_album_id}"
-  headers = {'Authorization': f'Bearer {access_token}'}
-  album_tracks = requests.request("GET", url, headers=headers)
-  # print(album_tracks.text.encode("utf-8"))
-  album_tracks_json = album_tracks.json() 
-  tracks = [track['uri'] for track in album_tracks_json['tracks']['items']]
-  # print(tracks)
+  tracks = get_album_tracks(top_album_id, access_token)
 
   #  FEED LIST OF TRACKS TO THE ADD TO PLAYLIST ENDPOINT
-  url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks" # REPLACE WITH PLAYLIST_ID
-  payload = json.dumps({"uris": tracks})
-  headers = {'Content-Type': 'application/json',
-    'Authorization': f'Bearer {access_token}'}
-  add_tracks_to_playlist = requests.request("POST", url, headers=headers, data=payload)
-  # print(add_tracks_to_playlist.text)
+  tracks_added_to_playlist = add_tracks_to_spotify(playlist_id, tracks, access_token, top_album_score)
 
-  print(f'album w/similarity = {top_album_score:.2f} was added\n')
-  return add_tracks_to_playlist
+  return tracks_added_to_playlist
