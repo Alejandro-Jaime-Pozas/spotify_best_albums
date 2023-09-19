@@ -18,13 +18,12 @@ def add_album_data_excel(list_data):
 
     # Write data to the worksheet
     for row_index, row_data in enumerate(list_data, start=2):
-        id, spotify_name, acclaimed_music_name, similarity_score, album_found_on_spotify, year = row_data
-        sheet.cell(row=row_index, column=1, value=id)
-        sheet.cell(row=row_index, column=2, value=spotify_name)
-        sheet.cell(row=row_index, column=3, value=acclaimed_music_name)
-        sheet.cell(row=row_index, column=4, value=similarity_score)
-        sheet.cell(row=row_index, column=5, value=album_found_on_spotify)
-        sheet.cell(row=row_index, column=6, value=year)
+        sheet.cell(row=row_index, column=1, value=row_data['top_album_id'])
+        sheet.cell(row=row_index, column=2, value=row_data['top_album_spotify_name'])
+        sheet.cell(row=row_index, column=3, value=row_data['acclaimed_music_album_name'])
+        sheet.cell(row=row_index, column=4, value=row_data['top_album_score'])
+        sheet.cell(row=row_index, column=5, value=row_data['album_found'])
+        sheet.cell(row=row_index, column=6, value=row_data['year'])
 
     # Save the Excel file
     workbook.save('spotify_album_data.xlsx')

@@ -61,3 +61,51 @@ def add_tracks_to_spotify(playlist_id, tracks, access_token, top_album_score):
 
     print(f'album w/similarity = {top_album_score:.2f} was added\n')
     return add_tracks_to_playlist
+
+
+# FOR EACH ALBUM RESULT, COLLECT ITS SIMILARITY TO ACCLAIMED MUSIC ALBUM, RETURN THE HIGHEST RESULT MATCH
+# NEED TO CHANGE THIS TO CREATE HIGHER QUALITY MATCHES FOR ARTIST/ALBUMS
+def get_album_match(spotify_results_list, acclaimed_music_album_name, year, list_data):
+
+    top_album_score = 0
+    top_album_id = None 
+    top_album_spotify_name = None 
+
+    for result in spotify_results_list:
+        album_id = result['id']
+        artist_name = result['artists'][0]['name'] # may need to change encoding here
+        album_name = result['name'] # may need to change encoding here
+        album_year = int(result['release_date'][:4])
+        # print(album_id)
+        spotify_search_album_name = f'''{artist_name} {album_name}'''
+        similarity = similarity_score(acclaimed_music_album_name, spotify_search_album_name, year, album_year)
+        # PRINT RESULTS FROM BOTH SITES, ALONG W/SIMILARITY
+        print(f'''REAL ALBUM: {acclaimed_music_album_name} - YEAR: {year}''')
+        try:
+            print(f'''SPOTIFY SEARCH: {spotify_search_album_name} - YEAR: {album_year}''')
+        except UnicodeEncodeError as e:
+            print('Unable to print due to Unicode Error!!!')
+        print(f'''SIMILARITY: {similarity:.2f}''')
+        print()
+        if similarity > top_album_score:
+            top_album_id = album_id
+            top_album_spotify_name = spotify_search_album_name
+            top_album_score = similarity
+
+    # ADD THE ALBUM DATA TO A DICTIONARY
+    data = {
+        'top_album_id': top_album_id, 
+        'top_album_spotify_name': top_album_spotify_name, 
+        'acclaimed_music_album_name': acclaimed_music_album_name, 
+        'top_album_score': top_album_score, 
+        'album_found': True if top_album_score > 0.35 else False, 
+        'year': year
+        }
+    list_data.append(data)
+
+    # IF SIMILARTY SCORE IS BELOW X AMOUNT, DON'T ADD THE ALBUM
+    if top_album_score < 0.35 or top_album_id == None:
+        print(f'there is no match for this album: {acclaimed_music_album_name}')
+        return None 
+    
+    return data 
