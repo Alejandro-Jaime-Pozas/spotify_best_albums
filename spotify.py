@@ -21,20 +21,20 @@ def create_new_playlist(year, access_token):
 
 
 # FOR EACH ALBUM, SEATCH AND ADD ALBUM TRACKS TO YEAR PLAYLIST
-def add_tracks_to_playlist(playlist_id, artist_album, year, list_data, access_token):
+def add_tracks_to_playlist(playlist_id, accl_artist, accl_album, accl_year, list_data, access_token):
 
   # SEARCH FOR THE ARTIST/ALBUM PAIR IN SEARCH ENDPOINT AND RETURN MULTIPLE ALBUM RESULTS
-  spotify_results_list = album_search_list(artist_album, access_token)
-  acclaimed_music_album_name = artist_album.replace('%20', ' ')
+  spotify_results_list = album_search_list(accl_artist, accl_album, access_token)
+  # acclaimed_music_album_name = artist_album.replace('%20', ' ')
   
 
   # FOR EACH ALBUM RESULT, COLLECT ITS SIMILARITY TO ACCLAIMED MUSIC ALBUM, RETURN THE HIGHEST RESULT MATCH
-  data = get_album_match(spotify_results_list, acclaimed_music_album_name, year, list_data)
+  data = get_album_match(spotify_results_list, accl_artist, accl_album, accl_year, list_data)
 
   # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER for the highest match
-  tracks = get_album_tracks(data['top_album_id'], access_token)
+  tracks = get_album_tracks(data['spot_top_album_id'], access_token)
 
   #  FEED LIST OF TRACKS TO THE ADD TO PLAYLIST ENDPOINT
-  tracks_added_to_playlist = add_tracks_to_spotify(playlist_id, tracks, access_token, data['top_album_score'])
+  tracks_added_to_playlist = add_tracks_to_spotify(playlist_id, tracks, access_token, data['top_album_overall_score'])
 
   return tracks_added_to_playlist
