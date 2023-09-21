@@ -1,4 +1,4 @@
-import requests, re, openpyxl
+import requests, re
 from bs4 import BeautifulSoup
 from spotify_keys import get_token
 from spotify import create_new_playlist, add_tracks_to_playlist
@@ -21,7 +21,7 @@ for year in range(year, end_year): # CHANGE TO END_YEAR
 
     # get website's response content
     albums_by_year = requests.get(f'https://www.acclaimedmusic.net/year/{year}a.htm')
-    # print(r.text)
+    # print(albums_by_year.text)
 
     if albums_by_year.status_code == 200:
 
