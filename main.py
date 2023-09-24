@@ -8,7 +8,7 @@ from excel_file import add_album_data_excel
 #   - analyze outcomes of excel file to see how best to account for the most album matches while removing those that don't match
 
 # initial year 1950
-start_year = 1954
+start_year =  1954
 end_year = 1963
 
 # create empty list to later add all data
@@ -45,11 +45,11 @@ for accl_year in range(start_year, end_year): # CHANGE TO END_YEAR
         access_token = get_token()
 
         # CREATE A PLAYLIST FOR CURRENT YEAR
-        playlist_id = create_new_playlist(accl_year, access_token)
+        playlist_id = create_new_playlist(accl_year, access_token) # TURNED OFF!!!!!!!!!!!!!
 
         # FOR EACH ALBUM IN ARTISTS_ALBUMS SEARCH THE ALBUM AND ADD TRACKS TO NEW PLAYLIST
         for accl_artist, accl_album in artists_albums_search:
-            add_tracks_to_playlist(playlist_id, accl_artist, accl_album, accl_year, list_data, access_token)
+            add_tracks_to_playlist(playlist_id, accl_artist, accl_album, accl_year, list_data, access_token) #TURNED OFF!!!!!!!!!!!!!!!!
 
         # ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
         add_album_data_excel(list_data)

@@ -1,21 +1,23 @@
-# CHATGPT SIMILARITY FN
-import difflib
+# # CHATGPT SIMILARITY FN
+# import difflib
 
-def similarity_score(str1, str2):
-    # Convert the strings to lowercase to make the comparison case-insensitive
-    str1 = str1.lower()
-    str2 = str2.lower()
-    # Calculate the similarity ratio between the two strings
-    similarity_ratio = difflib.SequenceMatcher(None, str1, str2).ratio()
-    return similarity_ratio
+# def similarity_score(str1, str2):
+#     # Convert the strings to lowercase to make the comparison case-insensitive
+#     str1 = str1.lower()
+#     str2 = str2.lower()
+#     # Calculate the similarity ratio between the two strings
+#     similarity_ratio = difflib.SequenceMatcher(None, str1, str2).ratio()
+#     return similarity_ratio
 
-# Test the function with your example strings
-string1 = 'gang of youths life is hell'
-string2 = 'gang of youths life'
+# # Test the function with your example strings
+# string1 = 'gang of youths life is hell'
+# string2 = 'gang of youths life'
 
-score = similarity_score(string1, string2)
-print(f'Similarity Score: {score:.2f}')
+# score = similarity_score(string1, string2)
+# print(f'Similarity Score: {score:.2f}')
 
+string = 'and are spaces splitting or just chars?'
+print(string.split())
 
 
 # import nltk
