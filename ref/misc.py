@@ -16,8 +16,8 @@
 # score = similarity_score(string1, string2)
 # print(f'Similarity Score: {score:.2f}')
 
-string = 'and are spaces splitting or just chars?'
-print(string.split())
+string = ['the', 'of', 'to', 'and', 'at', 'with'] + [1,2,3,4]
+print(string)
 
 
 # import nltk
