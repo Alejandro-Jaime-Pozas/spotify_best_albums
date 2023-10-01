@@ -8,8 +8,8 @@ from excel_file import add_album_data_excel
 #   - analyze outcomes of excel file to see how best to account for the most album matches while removing those that don't match
 
 # initial year 1950
-start_year =  1954
-end_year = 2020
+start_year =  2008
+end_year = 2009
 
 # create empty list to later add all data
 list_data = []
@@ -36,8 +36,10 @@ for accl_year in range(start_year, end_year): # CHANGE TO END_YEAR
         artists_albums_search = []
         for match in matches:
             # HERE MAYBE CHANGE THE CHARS THAT ARE BEING MAPPED I.E. turn é into e
-            accl_artist = re.sub(r'[^a-zA-Z0-9\s]', ' ', match[0]).replace(' amp ', ' ').strip()
-            accl_album = re.sub(r'[^a-zA-Z0-9\s]', ' ', match[1]).replace(' amp ', ' ').strip()
+            accl_artist =  match[0].replace(' amp ', ' ').strip()
+            accl_album =  match[1].replace(' amp ', ' ').strip()
+            # accl_artist = re.sub(r'[^a-zA-Z0-9.\/\'\s]', ' ', match[0]).replace(' amp ', ' ').strip()
+            # accl_album = re.sub(r'[^a-zA-Z0-9.\/\'\s]', ' ', match[1]).replace(' amp ', ' ').strip()
             artists_albums_search.append((accl_artist, accl_album))
         # print(artists_albums_search)
 
