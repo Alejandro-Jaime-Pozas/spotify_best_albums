@@ -28,16 +28,19 @@ def similarity_score(accl_artist,
     # Convert the strings to lowercase to make the comparison case-insensitive
     accl_artist, accl_album = accl_artist.lower(), accl_album.lower()
     spot_artist_name, spot_album_name = spot_artist_name.lower(), spot_album_name.lower()
-    # Remove content within parentheses and square brackets
+    # Remove content within parentheses and square brackets form spot album names
     spot_album_name_clean = re.sub(r'\([^)]*\)', '', re.sub(r'\[[^\]]*\]', '', spot_album_name))
-    # Replace '-' and '/' with space
+    # Replace special chars
     accl_artist = re.sub(r'[/]', ' ', accl_artist)
     accl_artist = re.sub(r'[^a-zA-Z0-9\.\'\- ]', '', accl_artist)
     spot_artist_name = re.sub(r'[/]', ' ', spot_artist_name)
     spot_artist_name = re.sub(r'[^a-zA-Z0-9\.\'\- ]', '', spot_artist_name)
+    accl_album = re.sub(r'[-]', ' ', accl_album)
+    accl_album = re.sub(r'[/]', ' ', accl_album)
+    accl_album = re.sub(r'[^a-zA-Z0-9\. ]', '', accl_album)
     spot_album_name_clean = re.sub(r'[-]', ' ', spot_album_name_clean)
     spot_album_name_clean = re.sub(r'[/]', ' ', spot_album_name_clean)
-    spot_album_name_clean = re.sub(r'[^a-zA-Z0-9 ]', '', spot_album_name_clean)
+    spot_album_name_clean = re.sub(r'[^a-zA-Z0-9\. ]', '', spot_album_name_clean)
     # Calculate the similarity ratio between the two strings
     artist_similarity_ratio = difflib.SequenceMatcher(None, accl_artist, spot_artist_name).quick_ratio()
     album_similarity_ratio = difflib.SequenceMatcher(None, accl_album, spot_album_name_clean).quick_ratio()
@@ -103,10 +106,6 @@ def similarity_score(accl_artist,
             if match_album_words == 0: #or match_album_words / len(accl_album_words_list) <= 0.5 
                 overall_similarity_ratio = 0
                 # print(f'spot_album REJECTED bc no matching album words: {accl_album} VS {spot_album_name_clean} = {match_album_words}')
-            # WARNING THIS BELOW COULD RUIN A LOT OF ALBUM MATCHES SO CHECK IT OUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            # points_to_deduct = abs(len(spot_album_name_clean.split()) - len(accl_album.split())) * 0.1
-            # overall_similarity_ratio -= points_to_deduct
-            # print(f'similarity ratio went down {points_to_deduct} {overall_similarity_ratio}')
         else:
             # if album only has the artist's name in album, check if name matches, else reject
             # print(accl_artist_list)
@@ -168,14 +167,15 @@ def get_album_match(spotify_results_list, accl_artist, accl_album, accl_year, li
                 # print()
 
             # fheck if score, artist, album matches are > previous iterations
-            if similarity["overall_similarity_ratio"] > top_album_overall_score:
-                # if similarity["match_album_words"] >= top_match_album_words:
-                top_album_id = spot_album_id
-                top_album_artist_name = spot_artist_name
-                top_album_name = spot_album_name
-                top_album_overall_score = similarity["overall_similarity_ratio"]
-                top_album_artist_score = similarity["artist_similarity_ratio"]
-                top_album_score = similarity["album_similarity_ratio"]
+            if similarity:
+                if similarity["overall_similarity_ratio"] > top_album_overall_score:
+                    # if similarity["match_album_words"] >= top_match_album_words:
+                    top_album_id = spot_album_id
+                    top_album_artist_name = spot_artist_name
+                    top_album_name = spot_album_name
+                    top_album_overall_score = similarity["overall_similarity_ratio"]
+                    top_album_artist_score = similarity["artist_similarity_ratio"]
+                    top_album_score = similarity["album_similarity_ratio"]
 
 
     # add an upper limit to reject albums below that limit
@@ -214,29 +214,29 @@ def get_album_match(spotify_results_list, accl_artist, accl_album, accl_year, li
 
 # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER for the highest match
 def get_album_tracks(top_album_id, access_token):
-    # url = f"https://api.spotify.com/v1/albums/{top_album_id}"
-    # headers = {'Authorization': f'Bearer {access_token}'}
-    # album_tracks = requests.request("GET", url, headers=headers)
+    url = f"https://api.spotify.com/v1/albums/{top_album_id}"
+    headers = {'Authorization': f'Bearer {access_token}'}
+    album_tracks = requests.request("GET", url, headers=headers)
     # print(album_tracks.text.encode("utf-8"))
-    # album_tracks_json = album_tracks.json() 
-    # tracks = [track['uri'] for track in album_tracks_json['tracks']['items']]
+    album_tracks_json = album_tracks.json() 
+    tracks = [track['uri'] for track in album_tracks_json['tracks']['items']]
     # print(tracks)
-    # return tracks
-    pass 
+    return tracks
+    # pass 
 
 
 #  FEED LIST OF TRACKS TO THE ADD TO PLAYLIST ENDPOINT
 def add_tracks_to_spotify(playlist_id, tracks, access_token, top_album_overall_score):
-    # url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks" 
-    # payload = json.dumps({"uris": tracks})
-    # headers = {'Content-Type': 'application/json',
-    #     'Authorization': f'Bearer {access_token}'}
-    # add_tracks_to_playlist = requests.request("POST", url, headers=headers, data=payload)
+    url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks" 
+    payload = json.dumps({"uris": tracks})
+    headers = {'Content-Type': 'application/json',
+        'Authorization': f'Bearer {access_token}'}
+    add_tracks_to_playlist = requests.request("POST", url, headers=headers, data=payload)
     # print(add_tracks_to_playlist.text)
 
     # print(f'album w/similarity = {top_album_overall_score:.2f} was added\n')
-    # return add_tracks_to_playlist
-    pass 
+    return add_tracks_to_playlist
+    # pass 
 
 
 

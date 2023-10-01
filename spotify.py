@@ -4,21 +4,21 @@ from steps_add_to_playlist import album_search_list, similarity_score, get_album
 # FOR EACH YEAR
 # CREATE A NEW PLAYLIST
 def create_new_playlist(year, access_token):
-  # url = "https://api.spotify.com/v1/users/alexjaime/playlists"
-  # payload = json.dumps({
-  #   "name": f"{year} Best Albums"
-  # })
-  # headers = {
-  #   'Content-Type': 'application/json',
-  #   'Authorization': f'Bearer {access_token}' # CHANGE THIS LATER TO AUTOMATE ACCESS_TOKEN
-  # }
-  # new_playlist = requests.request("POST", url, headers=headers, data=payload)
-  # # print(response.json())
-  # playlist = new_playlist.json()
-  # playlist_id = playlist['id']
-  # # print(playlist_id)
-  # return playlist_id
-  pass 
+  url = "https://api.spotify.com/v1/users/alexjaime/playlists"
+  payload = json.dumps({
+    "name": f"{year} Best Albums"
+  })
+  headers = {
+    'Content-Type': 'application/json',
+    'Authorization': f'Bearer {access_token}' # CHANGE THIS LATER TO AUTOMATE ACCESS_TOKEN
+  }
+  new_playlist = requests.request("POST", url, headers=headers, data=payload)
+  # print(response.json())
+  playlist = new_playlist.json()
+  playlist_id = playlist['id']
+  # print(playlist_id)
+  return playlist_id
+  # pass 
 
 
 # FOR EACH ALBUM, SEATCH AND ADD ALBUM TRACKS TO YEAR PLAYLIST

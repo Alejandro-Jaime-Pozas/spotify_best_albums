@@ -5,11 +5,11 @@ from spotify import create_new_playlist, add_tracks_to_playlist
 from excel_file import add_album_data_excel
 
 # TODO
-#   - analyze outcomes of excel file to see how best to account for the most album matches while removing those that don't match
+#   - clean spotify year playlists based on albums that are NOT a match
 
 # initial year 1950
-start_year =  2008
-end_year = 2009
+start_year =  1950
+end_year = 2020
 
 # create empty list to later add all data
 list_data = []
@@ -36,8 +36,8 @@ for accl_year in range(start_year, end_year): # CHANGE TO END_YEAR
         artists_albums_search = []
         for match in matches:
             # HERE MAYBE CHANGE THE CHARS THAT ARE BEING MAPPED I.E. turn é into e
-            accl_artist =  match[0].replace(' amp ', ' ').strip()
-            accl_album =  match[1].replace(' amp ', ' ').strip()
+            accl_artist =  match[0].replace(' &amp; ', '').strip()
+            accl_album =  match[1].replace(' &amp; ', '').strip()
             # accl_artist = re.sub(r'[^a-zA-Z0-9.\/\'\s]', ' ', match[0]).replace(' amp ', ' ').strip()
             # accl_album = re.sub(r'[^a-zA-Z0-9.\/\'\s]', ' ', match[1]).replace(' amp ', ' ').strip()
             artists_albums_search.append((accl_artist, accl_album))
@@ -47,11 +47,11 @@ for accl_year in range(start_year, end_year): # CHANGE TO END_YEAR
         access_token = get_token()
 
         # CREATE A PLAYLIST FOR CURRENT YEAR
-        playlist_id = create_new_playlist(accl_year, access_token) # TURNED OFF!!!!!!!!!!!!!
+        playlist_id = create_new_playlist(accl_year, access_token)
 
         # FOR EACH ALBUM IN ARTISTS_ALBUMS SEARCH THE ALBUM AND ADD TRACKS TO NEW PLAYLIST
         for accl_artist, accl_album in artists_albums_search:
-            add_tracks_to_playlist(playlist_id, accl_artist, accl_album, accl_year, list_data, access_token) #TURNED OFF!!!!!!!!!!!!!!!!
+            add_tracks_to_playlist(playlist_id, accl_artist, accl_album, accl_year, list_data, access_token)
 
         # ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
         add_album_data_excel(list_data)
@@ -59,6 +59,3 @@ for accl_year in range(start_year, end_year): # CHANGE TO END_YEAR
 
     else:
         print(f"status code: {albums_by_year.status_code} - for year {accl_year} in acclaimed music website")
-
-# # ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
-# add_album_data_excel(list_data)
