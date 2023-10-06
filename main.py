@@ -7,9 +7,12 @@ from excel_file import add_album_data_excel
 # TODO
 #   - clean spotify year playlists based on albums that are NOT a match
 
-# initial year 1950
-start_year =  1950
-end_year = 2020
+# initial year 1950 end year 2020
+start_year =  1
+end_year = 2
+
+# CREATE CODE TO LOOP THROUGH ALL GENRES, ADD THE PLAYLIST NAME TO SPOTIFY AUTOMATICALLY, if error need to know at which point the error occurred...
+genres = [20, 24, 25, 26, 27, 28, 30, 35, 36, 37, 38, 39, 41, 42, 47, 48, 52, 53, 54, 55, 57, 59, 60, 61, 62, 64, 65, 68, 70, 71, 72, 73, 75, 76, 77, 78, 80, 81, 82, 120, 83, 85, 86, 87, 88, 90, 91, 92, 93, 95, 97, 98, 100, 103, 104, 107, 108, 110, 113, 114, 115, 116, 119]
 
 # create empty list to later add all data
 list_data = []
@@ -20,7 +23,8 @@ for accl_year in range(start_year, end_year): # CHANGE TO END_YEAR
     print(accl_year)
 
     # get website's response content
-    albums_by_year = requests.get(f'https://www.acclaimedmusic.net/year/{accl_year}a.htm')
+    # albums_by_year = requests.get(f'https://www.acclaimedmusic.net/year/{accl_year}a.htm')
+    albums_by_year = requests.get(f'https://www.acclaimedmusic.net/genre/genre{19}.htm')
     # print(albums_by_year.text)
 
     if albums_by_year.status_code == 200:
