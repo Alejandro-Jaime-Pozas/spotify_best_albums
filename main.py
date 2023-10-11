@@ -10,7 +10,7 @@ from excel_file import add_album_data_excel
 # initial year 1950 end year 2020
 start_year =  1
 end_year = 2
-genres = [19, 20, 24, 25, 26, 27, 28, 30, 35, 36, 37, 38, 39, 41, 42, 47, 48, 52, 53, 54, 55, 57, 59, 60, 61, 62, 64, 65, 68, 70, 71, 72, 73, 75, 76, 77, 78, 80, 81, 82, 120, 83, 85, 86, 87, 88, 90, ]
+genres = [28, 30, 35, 36, 37, 38, 39, 41, 42, 47, 48, 52, 53, 54, 55, 57, 59, 60, 61, 62, 64, 65, 68, 70, 71, 72, 73, 75, 76, 77, 78, 80, 81, 82, 120, 83, 85, 86, 87, 88, 90, ]
 # create empty list to later add all data
 list_data = []
 
@@ -22,10 +22,8 @@ for accl_year in genres: # CHANGE CODE BACK!!!
 
     # get website's response content
     # albums_by_year = requests.get(f'https://www.acclaimedmusic.net/year/{accl_year}a.htm') # CHANGE CODE BACK!!!
-    albums_by_year = requests.get(f'https://www.acclaimedmusic.net/genre/genre{17}.htm')
-    print(albums_by_year.text)
-
-    pass # REMOVE
+    albums_by_year = requests.get(f'https://www.acclaimedmusic.net/genre/genre{accl_year}.htm') # CHANGE BACK!!!
+    # print(albums_by_year.text)
 
     if albums_by_year.status_code == 200:
 
@@ -34,6 +32,12 @@ for accl_year in genres: # CHANGE CODE BACK!!!
         soup_str = ''.join([c for c in soup.prettify() if ord(c)<128]) # get alphanum chars only
         pattern = r'<td>\s*<a href="[^"]*">\s*(.*?)\s*</a>\s*</td>\s*<td>\s*<a href="[^"]*">\s*(.*?)\s*</a>\s*</td>'
         matches = re.findall(pattern, soup_str, re.DOTALL)
+        genre_pattern = r'<div class="auto-style1">\s*<strong>\s*(.*?)\s*</strong>\s*</div>'
+        genre_match = re.search(genre_pattern, soup_str, re.DOTALL)
+        # print(genre_match)
+        if genre_match:
+            genre_text = genre_match.group(1)
+            print(genre_text)
 
         # CREATE LIST WITH ARTIST AND ALBUM FORMATTED FOR URL PARAMS
         # need to...separate the acclaimed artist and album names..then spotify as well in order to compare...then 
@@ -51,7 +55,8 @@ for accl_year in genres: # CHANGE CODE BACK!!!
         access_token = get_token()
 
         # CREATE A PLAYLIST FOR CURRENT YEAR
-        playlist_id = create_new_playlist(accl_year, access_token)
+        # playlist_id = create_new_playlist(accl_year, access_token) # CHANGE BACK!@!!
+        playlist_id = create_new_playlist(genre_text, access_token) # CHANGE BACK!!!!   
 
         # FOR EACH ALBUM IN ARTISTS_ALBUMS SEARCH THE ALBUM AND ADD TRACKS TO NEW PLAYLIST
         for accl_artist, accl_album in artists_albums_search:

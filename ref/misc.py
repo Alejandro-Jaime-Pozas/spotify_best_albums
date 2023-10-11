@@ -16,9 +16,7 @@
 # score = similarity_score(string1, string2)
 # print(f'Similarity Score: {score:.2f}')
 
-string = ['the', 'of', 'to', 'and', 'at', 'with'] + [1,2,3,4]
-print(string)
-
+print(' '.join('top house and dance albums'.split()[1:-1]))
 
 # import nltk
 # from nltk.corpus import stopwords

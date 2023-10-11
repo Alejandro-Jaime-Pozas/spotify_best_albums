@@ -3,10 +3,11 @@ from steps_add_to_playlist import album_search_list, similarity_score, get_album
 
 # FOR EACH YEAR
 # CREATE A NEW PLAYLIST
-def create_new_playlist(year, access_token):
+def create_new_playlist(genre_name, access_token):
   url = "https://api.spotify.com/v1/users/alexjaime/playlists"
   payload = json.dumps({
-    "name": f"{year} Best Albums"
+    # "name": f"{year} Best Albums" # CHANGE BACK!!!
+    "name": f"{' '.join((genre_name.split()[1:-1]))} Best Albums"
   })
   headers = {
     'Content-Type': 'application/json',
