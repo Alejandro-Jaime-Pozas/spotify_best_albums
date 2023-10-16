@@ -52,6 +52,7 @@ def similarity_score(accl_artist,
     # First filter: if overall > 0.90, then album is a match (manually checked this)
     # print(f'CHECKING FOR ACCL ALBUM: {accl_artist_album}')
     if overall_similarity_ratio > 0.90:
+        # MISSING HERE TO REDUCE SIMILARITY RATIO IF DELUXE OR EXPANDED IN ALBUM NAME...
         overall_similarity_ratio += 9
         # print(f'accl_album passed: {accl_artist_album}')
         # print(f'spot_album passed: {spot_artist_album}')

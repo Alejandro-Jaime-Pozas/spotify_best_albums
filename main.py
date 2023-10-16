@@ -10,7 +10,7 @@ from excel_file import add_album_data_excel
 # initial year 1950 end year 2020
 start_year =  1
 end_year = 2
-genres = [85, 86, 87, 88, 90, ]
+genres = [88, 90, 91, 92, 93,94,95,96,97,98,100,102,103,104,108,110,111,112,113,114,115,116,119]
 # create empty list to later add all data
 list_data = []
 
