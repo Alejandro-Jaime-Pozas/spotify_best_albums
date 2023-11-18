@@ -52,7 +52,9 @@ def similarity_score(accl_artist,
     # First filter: if overall > 0.90, then album is a match (manually checked this)
     # print(f'CHECKING FOR ACCL ALBUM: {accl_artist_album}')
     if overall_similarity_ratio > 0.90:
-        # MISSING HERE TO REDUCE SIMILARITY RATIO IF DELUXE OR EXPANDED IN ALBUM NAME...
+        # REDUCE SIMILARITY RATIO IF DELUXE OR EXPANDED IN ALBUM NAME...
+        if 'expanded' in spot_album_name or 'deluxe' in spot_album_name:
+            overall_similarity_ratio -= 0.05
         overall_similarity_ratio += 9
         # print(f'accl_album passed: {accl_artist_album}')
         # print(f'spot_album passed: {spot_artist_album}')
@@ -144,39 +146,41 @@ def get_album_match(spotify_results_list, accl_artist, accl_album, accl_year, li
 
         for result in spotify_results_list:
             if result:
-                spot_album_id = result['id']
-                spot_artist_name = result['artists'][0]['name'] # may need to change encoding here
-                spot_album_name = result['name'] # may need to change encoding here
-                spot_album_year = int(result['release_date'][:4])
-                # print(spot_album_id)
+                # ommit any singles and only allow albums and compilations per spotify API
+                if result['album_type'] != 'single':
+                    spot_album_id = result['id']
+                    spot_artist_name = result['artists'][0]['name'] # may need to change encoding here
+                    spot_album_name = result['name'] # may need to change encoding here
+                    spot_album_year = int(result['release_date'][:4])
+                    # print(spot_album_id)
 
-                similarity = similarity_score(accl_artist, 
-                                            accl_album, 
-                                            spot_artist_name, 
-                                            spot_album_name,
-                                            accl_year, 
-                                            spot_album_year)
-                # PRINT RESULTS FROM BOTH SITES, ALONG W/SIMILARITY
-                # print(f'''REAL ARTIST: {accl_artist}
-                #       === REAL ALBUM: {accl_album} - YEAR: {accl_year}''')
-                # try:
-                    # print(f'''SPOTIFY ARTIST: {spot_artist_name}
-                #           === SPOTIFY ALBUM: {spot_album_name} - YEAR: {spot_album_year}''')
-                # except UnicodeEncodeError as e:
-                    # print('Unable to print due to Unicode Error!!!')
-                # print(f'''SIMILARITY: {similarity[0]:.2f}''')
-                # print()
+                    similarity = similarity_score(accl_artist, 
+                                                accl_album, 
+                                                spot_artist_name, 
+                                                spot_album_name,
+                                                accl_year, 
+                                                spot_album_year)
+                    # PRINT RESULTS FROM BOTH SITES, ALONG W/SIMILARITY
+                    # print(f'''REAL ARTIST: {accl_artist}
+                    #       === REAL ALBUM: {accl_album} - YEAR: {accl_year}''')
+                    # try:
+                        # print(f'''SPOTIFY ARTIST: {spot_artist_name}
+                    #           === SPOTIFY ALBUM: {spot_album_name} - YEAR: {spot_album_year}''')
+                    # except UnicodeEncodeError as e:
+                        # print('Unable to print due to Unicode Error!!!')
+                    # print(f'''SIMILARITY: {similarity[0]:.2f}''')
+                    # print()
 
-            # fheck if score, artist, album matches are > previous iterations
-            if similarity:
-                if similarity["overall_similarity_ratio"] > top_album_overall_score:
-                    # if similarity["match_album_words"] >= top_match_album_words:
-                    top_album_id = spot_album_id
-                    top_album_artist_name = spot_artist_name
-                    top_album_name = spot_album_name
-                    top_album_overall_score = similarity["overall_similarity_ratio"]
-                    top_album_artist_score = similarity["artist_similarity_ratio"]
-                    top_album_score = similarity["album_similarity_ratio"]
+                    # fheck if score, artist, album matches are > previous iterations
+                    if similarity:
+                        if similarity["overall_similarity_ratio"] > top_album_overall_score:
+                            # if similarity["match_album_words"] >= top_match_album_words:
+                            top_album_id = spot_album_id
+                            top_album_artist_name = spot_artist_name
+                            top_album_name = spot_album_name
+                            top_album_overall_score = similarity["overall_similarity_ratio"]
+                            top_album_artist_score = similarity["artist_similarity_ratio"]
+                            top_album_score = similarity["album_similarity_ratio"]
 
 
     # add an upper limit to reject albums below that limit
