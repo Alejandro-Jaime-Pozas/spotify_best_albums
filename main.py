@@ -15,13 +15,15 @@ genres = []
 list_data = []
 
 # FOR EACH YEAR
-for accl_year in range(start_year, end_year): # CHANGE CODE BACK!!!
-# for accl_year in genres: # CHANGE CODE BACK!!!
+# for accl_year in range(start_year, end_year): # CHANGE CODE BACK!!!
+# for accl_year in genres:
+for accl_year in range(1):
     print('='*50)
     print(accl_year)
 
     # get website's response content
-    albums_by_year = requests.get(f'https://www.acclaimedmusic.net/year/{accl_year}a.htm') # CHANGE CODE BACK!!!
+    # albums_by_year = requests.get(f'https://www.acclaimedmusic.net/year/{accl_year}a.htm') # CHANGE CODE BACK!!!
+    albums_by_year = requests.get(f'https://www.acclaimedmusic.net/year/1980-89a.htm')
     # albums_by_year = requests.get(f'https://www.acclaimedmusic.net/genre/genre{accl_year}.htm') # CHANGE BACK!!!
     # print(albums_by_year.text)
 
