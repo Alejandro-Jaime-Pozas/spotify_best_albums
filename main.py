@@ -8,9 +8,10 @@ from excel_file import add_album_data_excel
 #   - clean spotify year playlists based on albums that are NOT a match
 
 # initial year 1950 end year 2020
-start_year =  1950
-end_year = 2010
+start_year =  2024
+end_year = start_year + 1
 genres = []
+get_artists_albums_from_text_file = True
 # create empty list to later add all data
 list_data = []
 
@@ -42,7 +43,7 @@ for accl_year in range(start_year, end_year): # CHANGE CODE BACK!!!
             print(genre_text)
 
         # CREATE LIST WITH ARTIST AND ALBUM FORMATTED FOR URL PARAMS
-        # need to...separate the acclaimed artist and album names..then spotify as well in order to compare...then 
+        # need to...separate the acclaimed artist and album names..then spotify as well in order to compare...
         artists_albums_search = []
         for match in matches:
             # HERE MAYBE CHANGE THE CHARS THAT ARE BEING MAPPED I.E. turn é into e
@@ -58,7 +59,7 @@ for accl_year in range(start_year, end_year): # CHANGE CODE BACK!!!
 
         # CREATE A PLAYLIST FOR CURRENT YEAR
         playlist_id = create_new_playlist(accl_year, access_token) # CHANGE BACK!@!!
-        # playlist_id = create_new_playlist(genre_text, access_token) # CHANGE BACK!!!!   
+        # playlist_id = create_new_playlist(genre_text, access_token) # CHANGE BACK!!!!
 
         # FOR EACH ALBUM IN ARTISTS_ALBUMS SEARCH THE ALBUM AND ADD TRACKS TO NEW PLAYLIST
         for accl_artist, accl_album in artists_albums_search:
@@ -66,7 +67,31 @@ for accl_year in range(start_year, end_year): # CHANGE CODE BACK!!!
 
         # ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
         add_album_data_excel(list_data)
-        
+
+
+    elif get_artists_albums_from_text_file:
+
+        artists_albums_search = []
+        # code to extract artist and album from txt file
+        with open('./year.txt', 'r', encoding='utf-8') as file:
+            for line in file:
+                artist_album = line.split('|')[1:]
+                artists_albums_search.append(artist_album)
+
+        # GET THE ACCESS TOKEN FOR SPOTIFY API
+        access_token = get_token()
+
+        # CREATE A PLAYLIST FOR CURRENT YEAR
+        playlist_id = create_new_playlist(accl_year, access_token) # CHANGE BACK!@!!
+        # playlist_id = create_new_playlist(genre_text, access_token) # CHANGE BACK!!!!
+
+        # FOR EACH ALBUM IN ARTISTS_ALBUMS SEARCH THE ALBUM AND ADD TRACKS TO NEW PLAYLIST
+        for accl_artist, accl_album in artists_albums_search:
+            add_tracks_to_playlist(playlist_id, accl_artist, accl_album, accl_year, list_data, access_token)
+
+        # ADD ALL OF THE LIST_DATA FOR ALBUMS TO AN EXCEL FILE
+        add_album_data_excel(list_data)
+
 
     else:
         print(f"status code: {albums_by_year.status_code} - for year {accl_year} in acclaimed music website")

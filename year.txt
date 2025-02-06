@@ -1,0 +1,200 @@
+1 | Charli XCX | Brat
+2 | Fontaines D.C. | Romance
+3 | The Cure | Songs of a Lost World
+4 | Billie Eilish | Hit Me Hard and Soft
+5 | Nick Cave & The Bad Seeds | Wild God
+6 | Beth Gibbons | Lives Outgrown
+7 | MJ Lenderman | Manning Fireworks
+8 | Adrianne Lenker | Bright Future
+9 | Tyler, the Creator | Chromakopia
+10 | Cindy Lee | Diamond Jubilee
+11 | Jessica Pratt | Here in the Pitch
+12 | Kendrick Lamar | GNX
+13 | Waxahatchee | Tigers Blood
+14 | Kim Gordon | The Collective
+15 | Vampire Weekend | Only God Was Above Us
+16 | Beyoncé | Cowboy Carter
+17 | Nilüfer Yanya | My Method Actor
+18 | Magdalena Bay | Imaginal Disk
+19 | The Last Dinner Party | Prelude to Ecstasy
+20 | Clairo | Charm
+21 | The Smile | Wall of Eyes
+22 | Mannequin Pussy | I Got Heaven
+23 | English Teacher | This Could Be Texas
+24 | Jack White | No Name
+25 | Mk.gee | Two Star & the Dream Police
+26 | Doechii | Alligator Bites Never Heal
+27 | Jamie xx | In Waves
+28 | St. Vincent | All Born Screaming
+29 | Arooj Aftab | Night Reign
+30 | Nala Sinephro | Endlessness
+31 | Cassandra Jenkins | My Light, My Destroyer
+32 | Blood Incantation | Absolute Elsewhere
+33 | Amyl and The Sniffers | Cartoon Darkness
+34 | Sabrina Carpenter | Short n' Sweet
+35 | IDLES | TANGK
+36 | Laura Marling | Patterns in Repeat
+37 | Father John Misty | Mahashmashana
+38 | Chat Pile | Cool World
+39 | Mount Eerie | Night Palace
+40 | Mdou Moctar | Funeral for Justice
+41 | Geordie Greep | The New Sound
+42 | Godspeed You! Black Emperor | No Title as of 13 February 2024 28,340 Dead
+43 | Sprints | Letter to Self
+44 | Johnny Blue Skies | Passage du Desir
+45 | Knocked Loose | You Won't Go Before You're Supposed To
+46 | Gillian Welch & David Rawlings | Woodland
+47 | Bill Ryder-Jones | Iechyd Da
+48 | Julia Holter | Something in the Room She Moves
+49 | Hurray for the Riff Raff | The Past Is Still Alive
+50 | ScHoolboy Q | BLUE LIPS
+51 | Mabe Fratti | Sentir Que no Sabes
+52 | Chelsea Wolfe | She Reaches Out to She Reaches Out to She
+53 | Kali Uchis | ORQUÍDEAS
+54 | Tyla | Tyla
+55 | The Smile | Cutouts
+56 | The Lemon Twigs | A Dream Is All We Know
+57 | Ka | The Thief Next to Jesus
+58 | Vince Staples | Dark Times
+59 | Brittany Howard | What Now
+60 | Still House Plants | If I don't Make It, I Love u
+61 | Being Dead | Eels
+62 | Kim Deal | Nobody Loves You More
+63 | Nia Archives | Silence Is Loud
+64 | Kneecap | Fine Art
+65 | Michael Kiwanuka | Small Changes
+66 | Mustafa | Dunya
+67 | JPEGMAFIA | I Lay Down My Life for You
+68 | Fabiana Palladino | Fabiana Palladino
+69 | DIIV | Frog In Boiling Water
+70 | Floating Points | Cascade
+71 | Tems | Born in the Wild
+72 | Judas Priest | Invincible Shield
+73 | Jlin | Akoma
+74 | Yard Act | Where's My Utopia?
+75 | Ariana Grande | Eternal Sunshine
+76 | Taylor Swift | THE TORTURED POETS DEPARTMENT
+77 | King Hannah | Big Swimmer
+78 | Rafael Toral | Spectral Evolution
+79 | Touché Amoré | Spiral in a Straight Line
+80 | Pet Shop Boys | Nonetheless
+81 | Shellac | To All Trains
+82 | Fat Dog | WOOF.
+83 | Charli XCX | Brat and It's Completely Different But Still Brat
+84 | Xiu Xiu | 13'' Frank Beltramme Italian Stilleto With Bison Horn Grips
+85 | David Gilmour | Luck and Strange
+86 | Rachel Chinouriri | What a Devastating Turn of Events
+87 | Friko | Where we’ve been, Where we go from here
+88 | Shabaka | Perceive Its Beauty, Acknowledge Its Grace
+89 | Nadine Shah | Filthy Underneath
+90 | Die Nerven | Wir waren hier
+91 | Kamasi Washington | Fearless Movement
+92 | Rema | Heis
+93 | Kacey Musgraves | Deeper Well
+94 | Wunderhorse | Midas
+95 | Opeth | The Last Will and Testament
+96 | Moin | You Never End
+97 | A.G. Cook | Britpop
+98 | Chief Keef | Almighty So 2
+99 | Dua Lipa | Radical Optimism
+100 | This Is Lorelei | Box for Buddy, Box for Star
+101 | Oranssi Pazuzu | Muuntautuja
+102 | Pearl Jam | Dark Matter
+103 | Tindersticks | Soft Tissue
+104 | Future & Metro Boomin | We Don't Trust You
+105 | Ezra Collective | Dance, No One's Watching
+106 | Beak> | >>>>
+107 | claire rousay | Sentiment
+108 | Astrid Sonne | Great Doubt
+109 | Justice | Hyperdrama
+110 | Empress Of | For Your Consideration
+111 | The Marías | Submarine
+112 | Denzel Curry | King of the Mischievous South Vol. 2
+113 | High Vis | Guided Tour
+114 | International Music | Endless Rüttenscheid
+115 | Jawnino | 40
+116 | Maggie Rogers | Don't Forget Me
+117 | Khruangbin | A La Sala
+118 | Bring Me the Horizon | Post Human: Nex Gen
+119 | Ducks Ltd. | Harm's Way
+120 | Confidence Man | 3AM (La La La)
+121 | Fievel Is Glauque | Rong Weicknes
+122 | Alcalá Norte | Alcalá Norte
+123 | Kelly Lee Owens | Dreamstate
+124 | Charles Lloyd | The Sky Will Still Be There Tomorrow
+125 | Remi Wolf | Big Ideas
+126 | Bladee | Cold Visions
+127 | Primal Scream | Come Ahead
+128 | Been Stellar | Scream from New York, NY
+129 | Zach Bryan | The Great American Bar Scene
+130 | Moor Mother | The Great Bailout
+131 | Caribou | Honey
+132 | Bolis Pupul | Letter to Yu
+133 | Porridge Radio | Clouds in the Sky They Will Always Be There for Me
+134 | Mach-Hommy | #RICHAXXHAITIAN
+135 | NewDad | Madra
+136 | Peter Perrett | The Cleansing
+137 | Viva Belgrado | Cancionero De Los Cielos
+138 | DJ Anderson do Paraíso | Queridão
+139 | MGMT | Loss of Life
+140 | Los Campesinos! | All Hell
+141 | Thou | Umbilical
+142 | Wild Pink | Dulling the Horns
+143 | Hinds | Viva Hinds
+144 | Trent Reznor & Atticus Ross | Challengers
+145 | GloRilla | Glorious
+146 | Faye Webster | Underdressed at the Symphony
+147 | Carolina Durante | Elige tu propia aventura
+148 | Chanel Beads | Your Day Will Come
+149 | Nubya Garcia | Odyssey
+150 | twenty one pilots | Clancy
+151 | Four Tet | Three
+152 | Kaytranada | Timeless
+153 | Milton Nascimento & Esperanza Spalding | Milton + Esperanza
+154 | K.I.Z. | Görlitzer Park
+155 | Linkin Park | From Zero
+156 | Ayra Starr | The Year I Turned 21
+157 | Elucid | Revelator
+158 | The Jesus and Mary Chain | Glasgow Eyes
+159 | Clarissa Connelly | World of Work
+160 | Alan Sparhawk | White Roses, My God
+161 | Christopher Owens | I Wanna Run Barefoot Through Your Hair
+162 | Kali Malone | All Life Long
+163 | Elbow | Audio Vertigo
+164 | Helado Negro | Phasor
+165 | skaiwater | #gigi
+166 | Wishy | Triple Seven
+167 | Immanuel Wilkins | Blues Blood
+168 | Daga Voladora | Los manatiales
+169 | Ride | Interplay
+170 | Tierra Whack | World Wide Whack
+171 | Bruce Dickinson | The Mandrake Project
+172 | Judeline | Bodhiria
+173 | Samara Joy | Portrait
+174 | Loidis | One Day
+175 | Common & Pete Rock | The Auditorium Vol. 1
+176 | Hamish Hawk | A Firmer Hand
+177 | Bob Vylan | Humble as the Sun
+178 | Arab Strap | I'm totally fine with it 👍don't give a fuck anymore 👍
+179 | BIG|BRAVE | A Chaos of Flowers
+180 | John Cale | POPtical Illusion
+181 | Beabadoobee | This Is How Tomorrow Moves
+182 | Bashy | Being Poor Is Expensive
+183 | Fat White Family | Forgiveness Is Yours
+184 | Gouge Away | Deep Sage
+185 | John Grant | The Art of the Lie
+186 | أحمد [Ahmed] | Giant Beauty
+187 | Maya Hawke | Chaos Angel
+188 | Nídia & Valentina | Estradas
+189 | Biznaga | ¡Ahora!
+190 | Brigitte Calls Me Baby | The Future Is Our Way Out
+191 | Amaro Freitas | Y'Y
+192 | Ulcerate | Cutting the Throat of God
+193 | MIKE & Tony Seltzer | Pinball
+194 | Hovvdy | Hovvdy
+195 | Ex-Easter Island Head | Norther
+196 | Poppy | Negative Spaces
+197 | Drug Church | Prude
+198 | Deep Purple | =1
+199 | Julie Christmas | Ridiculous and Full of Blood
+200 | Lime Garden | One More Thing
