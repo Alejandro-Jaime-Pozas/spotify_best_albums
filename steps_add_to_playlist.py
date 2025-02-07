@@ -8,22 +8,22 @@ def album_search_list(accl_artist, accl_album, access_token):
     headers = {'Authorization': f'Bearer {access_token}'}
     search = requests.request("GET", url, headers=headers)
     # print(search.text)
-    search_json = search.json() 
     try:
+        search_json = search.json()
         spotify_results_list = search_json['albums']['items'] # contains multiple album results for single search query
     except KeyError:
         print(f'no album info obtained for this spotify search query: {artist_album}')
-        spotify_results_list = None 
+        spotify_results_list = None
 
-    return spotify_results_list if spotify_results_list else None 
+    return spotify_results_list if spotify_results_list else None
 
 
 # CHECK SIMILARITY BW ACCLAIMED VS SPOTIFY RESULTS
-def similarity_score(accl_artist, 
-                     accl_album, 
-                     spot_artist_name, 
+def similarity_score(accl_artist,
+                     accl_album,
+                     spot_artist_name,
                      spot_album_name,
-                     accl_year, 
+                     accl_year,
                      spot_album_year):
     # Convert the strings to lowercase to make the comparison case-insensitive
     accl_artist, accl_album = accl_artist.lower(), accl_album.lower()
@@ -106,7 +106,7 @@ def similarity_score(accl_artist,
                     match_album_words += 1
                     overall_similarity_ratio += 0.5
                     # print(f'''word ({word}) from accl album matches spotify album word ({word})''', f'\nmatching words now {match_album_words}')
-            if match_album_words == 0: #or match_album_words / len(accl_album_words_list) <= 0.5 
+            if match_album_words == 0: #or match_album_words / len(accl_album_words_list) <= 0.5
                 overall_similarity_ratio = 0
                 # print(f'spot_album REJECTED bc no matching album words: {accl_album} VS {spot_album_name_clean} = {match_album_words}')
         else:
@@ -124,9 +124,9 @@ def similarity_score(accl_artist,
         # print()
 
 
-    return {    
-            "overall_similarity_ratio": overall_similarity_ratio, 
-            "artist_similarity_ratio": artist_similarity_ratio, 
+    return {
+            "overall_similarity_ratio": overall_similarity_ratio,
+            "artist_similarity_ratio": artist_similarity_ratio,
             "album_similarity_ratio": album_similarity_ratio
         }
 
@@ -138,9 +138,9 @@ def get_album_match(spotify_results_list, accl_artist, accl_album, accl_year, li
     top_album_overall_score = 0
     top_album_artist_score = 0
     top_album_score = 0
-    top_album_id = None 
-    top_album_artist_name = None 
-    top_album_name = None 
+    top_album_id = None
+    top_album_artist_name = None
+    top_album_name = None
 
     if spotify_results_list:
 
@@ -154,11 +154,11 @@ def get_album_match(spotify_results_list, accl_artist, accl_album, accl_year, li
                     spot_album_year = int(result['release_date'][:4])
                     # print(spot_album_id)
 
-                    similarity = similarity_score(accl_artist, 
-                                                accl_album, 
-                                                spot_artist_name, 
+                    similarity = similarity_score(accl_artist,
+                                                accl_album,
+                                                spot_artist_name,
                                                 spot_album_name,
-                                                accl_year, 
+                                                accl_year,
                                                 spot_album_year)
                     # PRINT RESULTS FROM BOTH SITES, ALONG W/SIMILARITY
                     # print(f'''REAL ARTIST: {accl_artist}
@@ -188,16 +188,16 @@ def get_album_match(spotify_results_list, accl_artist, accl_album, accl_year, li
 
     # ADD THE ALBUM DATA TO A DICTIONARY
     data = {
-        'spot_top_album_id': top_album_id, 
-        'spot_top_album_artist_name': top_album_artist_name, 
-        'accl_album_artist_name': accl_artist, 
-        'top_album_artist_score': top_album_artist_score, 
-        'spot_top_album_name': top_album_name, 
-        'accl_album_name': accl_album, 
-        'top_album_score': top_album_score, 
-        'top_album_overall_score': top_album_overall_score, 
+        'spot_top_album_id': top_album_id,
+        'spot_top_album_artist_name': top_album_artist_name,
+        'accl_album_artist_name': accl_artist,
+        'top_album_artist_score': top_album_artist_score,
+        'spot_top_album_name': top_album_name,
+        'accl_album_name': accl_album,
+        'top_album_score': top_album_score,
+        'top_album_overall_score': top_album_overall_score,
         'year': accl_year,
-        'album_found': True if top_album_overall_score > limit else False, 
+        'album_found': True if top_album_overall_score > limit else False,
         }
     list_data.append(data)
 
@@ -208,13 +208,13 @@ def get_album_match(spotify_results_list, accl_artist, accl_album, accl_year, li
         except:
             print('no match for album')
         print()
-        return None 
-    
+        return None
+
     try:
         print(f'''ADDED TO SPOTIFY: {top_album_artist_name} - {top_album_name}\n''')
     except:
         print('''can't print album data''')
-    return data 
+    return data
 
 
 # RETRIEVE INDIVIDUAL ALBUM TRACKS IN ORDER for the highest match
@@ -223,16 +223,16 @@ def get_album_tracks(top_album_id, access_token):
     headers = {'Authorization': f'Bearer {access_token}'}
     album_tracks = requests.request("GET", url, headers=headers)
     # print(album_tracks.text.encode("utf-8"))
-    album_tracks_json = album_tracks.json() 
+    album_tracks_json = album_tracks.json()
     tracks = [track['uri'] for track in album_tracks_json['tracks']['items']]
     # print(tracks)
     return tracks
-    # pass 
+    # pass
 
 
 #  FEED LIST OF TRACKS TO THE ADD TO PLAYLIST ENDPOINT
 def add_tracks_to_spotify(playlist_id, tracks, access_token, top_album_overall_score):
-    url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks" 
+    url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
     payload = json.dumps({"uris": tracks})
     headers = {'Content-Type': 'application/json',
         'Authorization': f'Bearer {access_token}'}
@@ -241,20 +241,20 @@ def add_tracks_to_spotify(playlist_id, tracks, access_token, top_album_overall_s
 
     # print(f'album w/similarity = {top_album_overall_score:.2f} was added\n')
     return add_tracks_to_playlist
-    # pass 
+    # pass
 
 
 
-# print(similarity_score('Nina Simone', 
-#                      'Little Girl Blue Jazz As Played in an Exclusive Side Street Club', 
-#                      'Nina Simone', 
+# print(similarity_score('Nina Simone',
+#                      'Little Girl Blue Jazz As Played in an Exclusive Side Street Club',
+#                      'Nina Simone',
 #                      'Verve Jazz Masters 17: Nina Simone',
-#                      1950, 
+#                      1950,
 #                      1950))
 
-# print(similarity_score('Nina Simone', 
-#                      'Little Girl Blue Jazz As Played in an Exclusive Side Street Club', 
-#                      'Nina Simone', 
+# print(similarity_score('Nina Simone',
+#                      'Little Girl Blue Jazz As Played in an Exclusive Side Street Club',
+#                      'Nina Simone',
 #                      'Little Girl Blue (Remastered 2013)',
-#                      1950, 
+#                      1950,
 #                      1950))
